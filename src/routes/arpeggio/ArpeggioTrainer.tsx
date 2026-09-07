@@ -5,7 +5,11 @@ import type { FretMarker } from '../../core/fretboard/types'
 import type { StringNumber } from '../../core/music/tuning'
 import { useSettings } from '../../store/settings'
 import { useProgress } from '../../store/progress'
-import { exercises, getExercise } from '../../data/arpeggios'
+import {
+  exercises,
+  getExercise,
+  type ChordShape,
+} from '../../data/arpeggios'
 import { ArpeggioList } from './ArpeggioList'
 import { NoteHighway } from './NoteHighway'
 import { TransportBar } from './TransportBar'
@@ -52,31 +56,23 @@ function ScoreImage({ id, name }: { id: number; name: string }) {
   )
 }
 
-const CHORD_SHAPES: Record<string, { string: StringNumber; fret: number | null }[]> = {
-  C: [
-    { string: 1, fret: 0 },
-    { string: 2, fret: 1 },
-    { string: 3, fret: 0 },
-    { string: 4, fret: 2 },
-    { string: 5, fret: 3 },
-    { string: 6, fret: null },
-  ],
-  G7: [
-    { string: 1, fret: 1 },
-    { string: 2, fret: 0 },
-    { string: 3, fret: 0 },
-    { string: 4, fret: 0 },
-    { string: 5, fret: 2 },
-    { string: 6, fret: 3 },
-  ],
-}
+const STRING_NUMS: StringNumber[] = [1, 2, 3, 4, 5, 6]
 
-function shapeMarkers(chord: string): FretMarker[] {
-  return (CHORD_SHAPES[chord] ?? []).map((n) =>
-    n.fret === null
-      ? { string: n.string, fret: 0, variant: 'muted', label: '×' }
-      : { string: n.string, fret: n.fret, variant: 'chord', label: String(n.fret) },
-  )
+/** Turn a bar's held shape into fretboard markers: a dot per played string
+ *  (open shown as "○"), an "×" for strings the bar doesn't use. */
+function shapeMarkers(shape: ChordShape): FretMarker[] {
+  return STRING_NUMS.map((s) => {
+    const fret = shape[String(s)]
+    if (fret === undefined) {
+      return { string: s, fret: 0, variant: 'muted', label: '×' }
+    }
+    return {
+      string: s,
+      fret,
+      variant: 'chord',
+      label: fret === 0 ? '○' : String(fret),
+    }
+  })
 }
 
 export default function ArpeggioTrainer() {
@@ -148,6 +144,7 @@ export default function ArpeggioTrainer() {
           beatsPerMeasure={player.beatsPerMeasure}
           loopBeat={player.loopBeat}
           countInBeatsLeft={player.countInBeatsLeft}
+          measureNames={exercise.measures.map((m) => m.name)}
           showFingering={settings.showFingering}
           showNoteNames={settings.showNoteNames}
         />
@@ -162,25 +159,29 @@ export default function ArpeggioTrainer() {
         </details>
 
         <section className="grid gap-4 sm:grid-cols-2">
-          {(['C', 'G7'] as const).map((chord) => (
-            <div key={chord} className="rounded-xl border border-border bg-surface p-3">
+          {exercise.measures.slice(0, 2).map((measure, i) => (
+            <div key={i} className="rounded-xl border border-border bg-surface p-3">
               <div className="text-sm text-muted mb-1">
-                Measure {chord === 'C' ? '1' : '2'} — {chord} shape (left hand held)
+                Measure {i + 1} —{' '}
+                <span className="text-text font-medium">{measure.name}</span>{' '}
+                (left hand held)
               </div>
               <Fretboard
                 fromFret={0}
                 toFret={4}
                 height={150}
-                markers={shapeMarkers(chord)}
+                markers={shapeMarkers(measure.shape)}
               />
             </div>
           ))}
         </section>
 
         <p className="text-xs text-muted">
-          The left hand holds the chord shape for the whole bar; only the
-          right-hand picking pattern changes from study to study. Fingering marks
-          (t/i/m/a) come from the score and repeat every bar.
+          The left hand holds the shape for the whole bar; only the right-hand
+          picking pattern changes from study to study. Shapes and fingering
+          (t/i/m/a) are read from the score — Giuliani&rsquo;s second bar is
+          usually G7 over a B bass. “×” means the bar doesn&rsquo;t use that
+          string.
         </p>
       </div>
     </div>

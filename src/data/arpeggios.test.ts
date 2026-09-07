@@ -39,6 +39,22 @@ describe('giuliani arpeggio data', () => {
     }
   })
 
+  it('every bar has a named voicing and a shape drawn from its notes', () => {
+    for (const ex of exercises) {
+      for (const m of ex.measures.slice(0, 2)) {
+        expect(m.name).toMatch(/^(C|G7)(\/[A-G]#?)?$/)
+        // every fretted string in the shape is actually played in the bar
+        for (const [s, fret] of Object.entries(m.shape)) {
+          expect(
+            m.notes.some((n) => String(n.string) === s && n.fret === fret),
+          ).toBe(true)
+        }
+      }
+      // Giuliani's classic second-bar voicing
+      expect(exercises[0].measures[1].name).toBe('G7/B')
+    }
+  })
+
   it('builds a monotonic playback plan of the two arpeggio bars', () => {
     for (const ex of exercises) {
       const plan = buildPlaybackPlan(ex)

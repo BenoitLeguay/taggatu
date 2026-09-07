@@ -11,8 +11,16 @@ export interface ArpNote {
   dur: number
 }
 
+/** string number ("1".."6") -> fret it's held at for this bar. Strings absent
+ *  from the map aren't played in the bar. */
+export type ChordShape = Record<string, number>
+
 export interface ArpMeasure {
+  /** Harmonic family: "C" or "G7". */
   chord: string
+  /** Display name of the actual voicing, e.g. "C", "C/G", "G7/B". */
+  name: string
+  shape: ChordShape
   columns: number
   notes: ArpNote[]
 }
@@ -38,7 +46,12 @@ export interface Exercise {
   flags: string[]
   fingering: Fingering
   measures: ArpMeasure[]
-  resolution: { chord: string; notes: { string: StringNumber; fret: number }[] } | null
+  resolution: {
+    chord: string
+    name: string
+    shape: ChordShape
+    notes: { string: StringNumber; fret: number }[]
+  } | null
 }
 
 export interface ArpeggioCollection {

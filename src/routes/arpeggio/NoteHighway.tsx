@@ -9,6 +9,8 @@ interface NoteHighwayProps {
   beatsPerMeasure: number
   loopBeat: number | null
   countInBeatsLeft: number | null
+  /** Chord label per bar, e.g. ["C", "G7/B"]. */
+  measureNames: string[]
   showFingering: boolean
   showNoteNames: boolean
 }
@@ -34,6 +36,7 @@ export function NoteHighway({
   beatsPerMeasure,
   loopBeat,
   countInBeatsLeft,
+  measureNames,
   showFingering,
   showNoteNames,
 }: NoteHighwayProps) {
@@ -44,11 +47,13 @@ export function NoteHighway({
 
   const measureLines = useMemo(() => {
     const out: { beat: number; label: string }[] = []
+    let i = 0
     for (let b = 0; b < totalBeats; b += beatsPerMeasure) {
-      out.push({ beat: b, label: b === 0 ? 'C' : 'G7' })
+      out.push({ beat: b, label: measureNames[i] ?? '' })
+      i++
     }
     return out
-  }, [totalBeats, beatsPerMeasure])
+  }, [totalBeats, beatsPerMeasure, measureNames])
 
   const pos = loopBeat ?? 0
   const layerShift = NOW_X - pos * pxPerBeat

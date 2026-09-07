@@ -16,7 +16,7 @@ import json
 import os
 import re
 import statistics
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 HERE = os.path.dirname(__file__)
 WORDS = os.path.join(HERE, "raw", "words.json")
@@ -25,6 +25,29 @@ OUT = os.path.join(HERE, "..", "src", "data", "giuliani.json")
 BEATS_PER_MEASURE = 4.0
 FINGER_MAP = {"T": "t", "I": "i", "M": "m", "A": "a", "P": "t", "a": "a"}
 CHORD_BY_MEASURE = ["C", "G7", "C"]
+
+PC_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+OPEN_MIDI = {1: 64, 2: 59, 3: 55, 4: 50, 5: 45, 6: 40}  # string -> open MIDI
+
+
+def measure_shape(notes):
+    """The left-hand shape a bar actually uses: string -> the fret it's played
+    at (most common, in case of a chromatic passing note)."""
+    per = {}
+    for n in notes:
+        per.setdefault(n["string"], Counter())[n["fret"]] += 1
+    return {s: c.most_common(1)[0][0] for s, c in per.items()}
+
+
+def chord_name(shape, family):
+    """Name a shape as C / G7 with a slash bass when the lowest played string
+    isn't the root — e.g. Giuliani's usual second bar is really G7/B."""
+    base, root_pc = ("C", 0) if family == "C" else ("G7", 7)
+    if not shape:
+        return base
+    bass_string = max(shape)  # highest string number == lowest pitch
+    bass_pc = (OPEN_MIDI[bass_string] + shape[bass_string]) % 12
+    return base if bass_pc == root_pc else f"{base}/{PC_NAMES[bass_pc]}"
 
 SUBDIVISION = {
     2: "half note",
@@ -204,7 +227,15 @@ def extract_exercise(page, slot, num):
         cols = raw_by_measure[mi]
         chord = CHORD_BY_MEASURE[mi]
         if not cols:
-            out_measures.append({"chord": chord, "columns": 0, "notes": []})
+            out_measures.append(
+                {
+                    "chord": chord,
+                    "columns": 0,
+                    "shape": {},
+                    "name": chord if chord != "C" else "C",
+                    "notes": [],
+                }
+            )
             continue
         cxs = [c for c, _ in cols]
         note_groups = [n for _, n in cols]
@@ -226,8 +257,15 @@ def extract_exercise(page, slot, num):
                     uniq.append(note)
                     notes_out.append({**note, "start": start, "dur": dur})
                 merged_cols[mi].append((cx, uniq))
+            shape = measure_shape(notes_out)
             out_measures.append(
-                {"chord": chord, "columns": n, "notes": notes_out}
+                {
+                    "chord": chord,
+                    "columns": n,
+                    "shape": {str(s): f for s, f in sorted(shape.items())},
+                    "name": chord_name(shape, chord),
+                    "notes": notes_out,
+                }
             )
         else:
             # measure 3: a held resolution chord (plus any quick lead-in)
@@ -238,15 +276,26 @@ def extract_exercise(page, slot, num):
                     notes_out.append(
                         {**note, "start": round(i * step, 4), "dur": round(step, 4)}
                     )
+            shape = measure_shape(notes_out)
             out_measures.append(
-                {"chord": chord, "columns": len(cols), "notes": notes_out}
+                {
+                    "chord": chord,
+                    "columns": len(cols),
+                    "shape": {str(s): f for s, f in sorted(shape.items())},
+                    "name": chord_name(shape, chord),
+                    "notes": notes_out,
+                }
             )
 
     resolution = None
     if raw_by_measure[2]:
+        res_notes = sorted(raw_by_measure[2][-1][1], key=lambda x: x["string"])
+        res_shape = measure_shape(res_notes)
         resolution = {
             "chord": "C",
-            "notes": sorted(raw_by_measure[2][-1][1], key=lambda x: x["string"]),
+            "shape": {str(s): f for s, f in sorted(res_shape.items())},
+            "name": chord_name(res_shape, "C"),
+            "notes": res_notes,
         }
 
     fingering = extract_fingering(band, row_y, edges, tol, merged_cols[0])
