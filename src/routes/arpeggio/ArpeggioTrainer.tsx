@@ -94,13 +94,28 @@ export default function ArpeggioTrainer() {
         <NoteHighway
           events={player.events}
           totalBeats={player.totalBeats}
-          beatsPerMeasure={exercise.timeSignature[0]}
+          beatsPerMeasure={player.beatsPerMeasure}
           loopBeat={player.loopBeat}
+          countInBeatsLeft={player.countInBeatsLeft}
           showFingering={settings.showFingering}
           showNoteNames={settings.showNoteNames}
         />
 
         <TransportBar player={player} />
+
+        <details className="rounded-xl border border-border bg-surface" open>
+          <summary className="cursor-pointer select-none px-4 py-2.5 text-sm text-muted hover:text-text">
+            Score &amp; tab
+          </summary>
+          <div className="border-t border-border overflow-x-auto bg-white">
+            <img
+              src={`${import.meta.env.BASE_URL}exercises/ex-${String(exercise.id).padStart(3, '0')}.png`}
+              alt={`Standard notation and tab for Giuliani ${exercise.name}`}
+              className="min-w-[720px] w-full"
+              loading="lazy"
+            />
+          </div>
+        </details>
 
         <section className="grid gap-4 sm:grid-cols-2">
           {(['C', 'G7'] as const).map((chord) => (

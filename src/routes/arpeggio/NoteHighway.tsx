@@ -8,142 +8,188 @@ interface NoteHighwayProps {
   totalBeats: number
   beatsPerMeasure: number
   loopBeat: number | null
+  countInBeatsLeft: number | null
   showFingering: boolean
   showNoteNames: boolean
 }
 
-const HEIGHT = 260
-const NOW_X = 130
-const BEATS_AHEAD = 4.5
+const WIDTH = 1000
+const HEIGHT = 340
+const PAD_TOP = 30
+const PAD_BOTTOM = 26
+const NOW_X = 190
+const BEATS_AHEAD = 3.1
+const BEATS_BEHIND = 1.0
+const NOTE_R = 17
 
 /**
- * The scrolling fretboard: six horizontal string lanes with the note pills for
- * the exercise flowing right-to-left past a fixed NOW line. The whole note
- * layer is positioned once and moved each frame by translating a group, so
- * per-frame cost stays flat regardless of note count.
+ * The scrolling fretboard: six string lanes, notes flowing right-to-left past a
+ * fixed NOW line. One transform moves the whole note layer each frame, so cost
+ * stays flat. Colour tells you a note's state: far = calm blue, approaching =
+ * bright, on the line = green, gone = dim.
  */
 export function NoteHighway({
   events,
   totalBeats,
   beatsPerMeasure,
   loopBeat,
+  countInBeatsLeft,
   showFingering,
   showNoteNames,
 }: NoteHighwayProps) {
-  const width = 900
-  const pxPerBeat = (width - NOW_X) / BEATS_AHEAD
-  const laneGap = (HEIGHT - 40) / (STRING_NUMBERS.length - 1)
-  const laneY = (s: number) => 20 + (s - 1) * laneGap
+  const innerH = HEIGHT - PAD_TOP - PAD_BOTTOM
+  const laneGap = innerH / (STRING_NUMBERS.length - 1)
+  const laneY = (s: number) => PAD_TOP + (s - 1) * laneGap
+  const pxPerBeat = (WIDTH - NOW_X) / BEATS_AHEAD
 
   const measureLines = useMemo(() => {
-    const lines: number[] = []
-    for (let b = 0; b <= totalBeats; b += beatsPerMeasure) lines.push(b)
-    return lines
+    const out: { beat: number; label: string }[] = []
+    for (let b = 0; b < totalBeats; b += beatsPerMeasure) {
+      out.push({ beat: b, label: b === 0 ? 'C' : 'G7' })
+    }
+    return out
   }, [totalBeats, beatsPerMeasure])
 
-  const beatTicks = useMemo(() => {
-    const t: number[] = []
-    for (let b = 0; b <= totalBeats; b++) t.push(b)
-    return t
-  }, [totalBeats])
-
   const pos = loopBeat ?? 0
-  // render the note layer three times (previous / current / next loop) so the
-  // wrap-around is seamless
+  const layerShift = NOW_X - pos * pxPerBeat
+  const noteX = (beat: number) => beat * pxPerBeat
+  // draw three loop copies so wrap-around is seamless
   const copies = [-totalBeats, 0, totalBeats]
 
-  const noteX = (beat: number) => beat * pxPerBeat
-  const layerShift = NOW_X - pos * pxPerBeat
+  const minVisibleBeat = pos - BEATS_BEHIND
+  const maxVisibleBeat = pos + BEATS_AHEAD + 0.5
 
   return (
-    <div className="rounded-xl border border-border bg-surface overflow-hidden">
+    <div className="rounded-xl border border-border bg-[#0b0d10] overflow-hidden relative">
       <svg
-        viewBox={`0 0 ${width} ${HEIGHT}`}
-        className="w-full"
-        style={{ display: 'block' }}
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        className="w-full block"
         role="img"
         aria-label="Scrolling fretboard"
       >
-        {/* lane backgrounds */}
+        {/* lane stripes + strings */}
         {STRING_NUMBERS.map((s) => (
           <g key={s}>
+            {s % 2 === 0 && (
+              <rect
+                x={0}
+                y={laneY(s) - laneGap / 2}
+                width={WIDTH}
+                height={laneGap}
+                fill="#ffffff"
+                opacity={0.02}
+              />
+            )}
             <line
               x1={0}
-              x2={width}
+              x2={WIDTH}
               y1={laneY(s)}
               y2={laneY(s)}
-              stroke="var(--fb-string)"
-              strokeWidth={0.5 + (s - 1) * 0.45}
-              opacity={0.5}
+              stroke="#5b6472"
+              strokeWidth={0.75 + (s - 1) * 0.7}
+              opacity={0.55}
             />
-            <text
-              x={10}
-              y={laneY(s) + 4}
-              fontSize={12}
-              fill="var(--fb-label)"
-              fontFamily="var(--font-mono)"
-            >
-              {STRING_LABELS[s]}
-            </text>
           </g>
         ))}
+
+        {/* hit zone */}
+        <rect
+          x={NOW_X - NOTE_R - 3}
+          y={6}
+          width={2 * (NOTE_R + 3)}
+          height={HEIGHT - 12}
+          fill="var(--color-good)"
+          opacity={0.08}
+        />
 
         {/* moving note layer */}
         <g transform={`translate(${layerShift} 0)`}>
           {copies.map((copyOffset) => (
             <g key={copyOffset} transform={`translate(${copyOffset * pxPerBeat} 0)`}>
-              {/* measure / beat grid travels with the notes */}
-              {beatTicks.map((b) => (
+              {/* beat ticks */}
+              {Array.from({ length: totalBeats + 1 }, (_, b) => (
                 <line
-                  key={`t${b}`}
+                  key={b}
                   x1={noteX(b)}
                   x2={noteX(b)}
-                  y1={12}
-                  y2={HEIGHT - 12}
-                  stroke="var(--color-border)"
+                  y1={PAD_TOP - 12}
+                  y2={HEIGHT - PAD_BOTTOM + 12}
+                  stroke="#2b323d"
                   strokeWidth={1}
-                  opacity={0.35}
+                  opacity={0.5}
                 />
               ))}
-              {measureLines.map((b) => (
-                <line
-                  key={`m${b}`}
-                  x1={noteX(b)}
-                  x2={noteX(b)}
-                  y1={8}
-                  y2={HEIGHT - 8}
-                  stroke="var(--color-muted)"
-                  strokeWidth={1.5}
-                  opacity={0.55}
-                />
+              {/* measure dividers + chord labels */}
+              {measureLines.map((m) => (
+                <g key={m.beat}>
+                  <line
+                    x1={noteX(m.beat)}
+                    x2={noteX(m.beat)}
+                    y1={10}
+                    y2={HEIGHT - 10}
+                    stroke="var(--color-muted)"
+                    strokeWidth={2}
+                    opacity={0.7}
+                  />
+                  <text
+                    x={noteX(m.beat) + 8}
+                    y={22}
+                    fontSize={14}
+                    fontWeight={700}
+                    fill="var(--color-muted)"
+                    fontFamily="var(--font-mono)"
+                  >
+                    {m.label}
+                  </text>
+                </g>
               ))}
 
               {events.map((ev, i) => {
+                const beatHere = ev.beat + copyOffset
+                if (beatHere < minVisibleBeat || beatHere > maxVisibleBeat) {
+                  return null
+                }
+                const rel = beatHere - pos // >0 ahead, <0 gone
                 const x = noteX(ev.beat)
                 const y = laneY(ev.string)
-                const dist = Math.abs(ev.beat + copyOffset - pos)
-                const active = dist < 0.14
-                const w = Math.max(18, ev.dur * pxPerBeat - 4)
+
+                let fill = 'var(--color-cool)'
+                let textFill = '#06263d'
+                let ring = 'none'
+                let opacity = 1
+                if (rel < -0.12) {
+                  fill = '#3a4250'
+                  textFill = '#9aa4b2'
+                  opacity = Math.max(0.25, 1 + rel / BEATS_BEHIND)
+                } else if (rel <= 0.12) {
+                  fill = 'var(--color-good)'
+                  textFill = '#05230f'
+                  ring = '#ffffff'
+                } else if (rel < 0.9) {
+                  fill = '#8fd0ff'
+                  textFill = '#06263d'
+                }
+
                 return (
-                  <g key={`${copyOffset}-${i}`}>
-                    <rect
-                      x={x - 11}
-                      y={y - 11}
-                      width={Math.max(22, w)}
-                      height={22}
-                      rx={11}
-                      fill={active ? 'var(--color-accent)' : 'var(--color-accent-soft)'}
-                      opacity={active ? 1 : 0.9}
-                      stroke={active ? '#fff' : 'transparent'}
-                      strokeWidth={1.5}
+                  <g key={`${copyOffset}-${i}`} opacity={opacity}>
+                    {ring !== 'none' && (
+                      <circle cx={x} cy={y} r={NOTE_R + 4} fill="none" stroke={ring} strokeWidth={2} />
+                    )}
+                    <circle
+                      cx={x}
+                      cy={y}
+                      r={NOTE_R}
+                      fill={fill}
+                      stroke="#0b0d10"
+                      strokeWidth={2}
                     />
                     <text
                       x={x}
-                      y={y + 4}
-                      fontSize={12}
-                      fontWeight={600}
+                      y={y + 5}
+                      fontSize={15}
+                      fontWeight={700}
                       textAnchor="middle"
-                      fill="#14181d"
+                      fill={textFill}
                       fontFamily="var(--font-mono)"
                     >
                       {showNoteNames ? midiToName(ev.midi) : ev.fret}
@@ -151,10 +197,10 @@ export function NoteHighway({
                     {showFingering && ev.finger && (
                       <text
                         x={x}
-                        y={y - 16}
-                        fontSize={10}
+                        y={y - NOTE_R - 6}
+                        fontSize={12}
                         textAnchor="middle"
-                        fill="var(--color-muted)"
+                        fill="var(--color-accent)"
                         fontFamily="var(--font-mono)"
                       >
                         {ev.finger}
@@ -167,20 +213,38 @@ export function NoteHighway({
           ))}
         </g>
 
-        {/* NOW line (fixed) */}
-        <line
-          x1={NOW_X}
-          x2={NOW_X}
-          y1={4}
-          y2={HEIGHT - 4}
-          stroke="var(--color-accent)"
-          strokeWidth={2}
-        />
+        {/* string labels (fixed, on top) */}
+        {STRING_NUMBERS.map((s) => (
+          <g key={s}>
+            <rect x={0} y={laneY(s) - 12} width={30} height={24} fill="#0b0d10" />
+            <text
+              x={8}
+              y={laneY(s) + 5}
+              fontSize={15}
+              fontWeight={700}
+              fill="var(--color-muted)"
+              fontFamily="var(--font-mono)"
+            >
+              {STRING_LABELS[s]}
+            </text>
+          </g>
+        ))}
+
+        {/* NOW line */}
+        <line x1={NOW_X} x2={NOW_X} y1={4} y2={HEIGHT - 4} stroke="var(--color-good)" strokeWidth={2.5} />
         <polygon
-          points={`${NOW_X - 6},4 ${NOW_X + 6},4 ${NOW_X},12`}
-          fill="var(--color-accent)"
+          points={`${NOW_X - 7},4 ${NOW_X + 7},4 ${NOW_X},14`}
+          fill="var(--color-good)"
         />
       </svg>
+
+      {countInBeatsLeft != null && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/45">
+          <span className="text-6xl font-bold text-accent tabular-nums">
+            {countInBeatsLeft}
+          </span>
+        </div>
+      )}
     </div>
   )
 }
