@@ -16,16 +16,16 @@
    "subdivision": "quarter note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 1,
+    "byPosition": [
+     [
       "m",
       "i",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -257,26 +257,20 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -508,26 +502,20 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -759,26 +747,20 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -1010,26 +992,20 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "m"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -1261,26 +1237,20 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -1512,44 +1482,29 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -1781,44 +1736,29 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -2050,80 +1990,47 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 12,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -2355,80 +2262,47 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 12,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -2660,27 +2534,21 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "i",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -2960,27 +2828,21 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -3260,45 +3122,30 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "i",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -3578,46 +3425,31 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "a"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -3897,46 +3729,31 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -4216,44 +4033,29 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -4485,44 +4287,29 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "i"
+     ],
+     [
+      "t"
+     ],
+     [
+      "i"
+     ],
+     [
+      "t"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -4754,28 +4541,22 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -5103,28 +4884,22 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -5452,28 +5227,22 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -5801,30 +5570,24 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -6248,30 +6011,24 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -6695,30 +6452,24 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -7142,32 +6893,26 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -7689,80 +7434,41 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -8037,80 +7743,41 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [
       "m"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "i"
+     ],
+     [
+      "m"
+     ],
+     [
+      "t"
+     ],
+     [
+      "t"
+     ],
+     [
+      "m"
+     ],
+     [
+      "i"
+     ],
+     [
+      "m"
+     ],
+     [
+      "t"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "m"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -8383,74 +8050,45 @@
    "subdivision": "thirty-second triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 12,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -8773,80 +8411,41 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -9121,74 +8720,39 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -9463,74 +9027,39 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "a"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -9805,44 +9334,26 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 5,
+    "byPosition": [
+     [
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -10117,44 +9628,26 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 5,
+    "byPosition": [
+     [
       "a"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -10427,44 +9920,29 @@
    "subdivision": "thirty-second triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "m"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -10787,44 +10265,29 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "a"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -11156,44 +10619,26 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 5,
+    "byPosition": [
+     [
       "a"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -11475,33 +10920,24 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -11829,33 +11265,24 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -12183,33 +11610,24 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -12537,33 +11955,24 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -12891,34 +12300,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -13294,34 +12694,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -13697,34 +13088,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -14100,34 +13482,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -14455,34 +13828,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -14858,34 +14222,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "a",
+      "i"
+     ],
+     [
+      "t"
+     ],
+     [
       "a",
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "a",
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -15261,35 +14616,26 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -15713,35 +15059,26 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "m",
+      "i"
+     ],
+     [
+      "m",
+      "t"
+     ],
+     [
       "m",
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "m",
-      "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "m",
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -16165,35 +15502,26 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -16617,35 +15945,26 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "m",
+      "i"
+     ],
+     [
+      "t"
+     ],
+     [
       "m",
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "m",
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -17069,36 +16388,27 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "m",
+      "i"
+     ],
+     [
+      "m",
+      "t"
+     ],
+     [
       "m",
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "m",
-      "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "m",
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -17570,32 +16880,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -18115,39 +17425,36 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -18667,39 +17974,37 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 11,
+    "byPosition": [
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -19219,39 +18524,38 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 12,
+    "byPosition": [
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -19771,40 +19075,33 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 1,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -20372,47 +19669,37 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 7,
+    "byPosition": [
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -20980,47 +20267,38 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -21588,32 +20866,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -22133,32 +21411,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -22726,32 +22004,33 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 1,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -23319,32 +22598,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -23960,32 +23239,33 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 1,
-     "fingers": [
+   "fingering": {
+    "cycle": 10,
+    "byPosition": [
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -24601,32 +23881,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -25242,32 +24522,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -25883,32 +25163,30 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 7,
+    "byPosition": [
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [],
+     [
+      "m",
+      "i",
+      "t"
+     ],
+     [
       "m",
       "i",
       "t"
      ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "m",
-      "i",
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -26572,34 +25850,25 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -26831,34 +26100,25 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -27090,34 +26350,25 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -27349,34 +26600,25 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -27608,36 +26850,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -27869,36 +27102,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -28178,36 +27402,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -28487,36 +27702,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -28748,36 +27954,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -29057,36 +28254,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -29366,38 +28554,29 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -29725,38 +28904,29 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -30084,38 +29254,29 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -30443,38 +29604,29 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -30802,32 +29954,26 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -31203,44 +30349,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "t"
      ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -31520,44 +30654,32 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 9,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
+      "t"
+     ],
+     [],
+     [],
+     [],
+     [
       "t"
      ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -31837,57 +30959,36 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -32191,39 +31292,27 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 5,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -32527,56 +31616,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -32856,56 +31924,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
+      "m"
+     ],
+     [
+      "t"
+     ],
+     [
+      "a"
+     ],
+     [
+      "i"
+     ],
+     [
       "m"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "a"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "m"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -33185,32 +32232,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -33490,32 +32528,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -33795,56 +32824,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
+      "i"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -34124,56 +33132,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
+      "a"
+     ],
+     [
+      "m"
+     ],
+     [
+      "i"
+     ],
+     [
+      "t"
+     ],
+     [
+      "i"
+     ],
+     [
+      "m"
+     ],
+     [
       "a"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "a"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -34453,104 +33440,59 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 16,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
+      "i"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 15,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -34830,32 +33772,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "a"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -35135,32 +34068,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -35440,104 +34364,47 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 12,
+    "byPosition": [
+     [
       "m"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
+      "i"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 11,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -35771,98 +34638,56 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 15,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -36130,56 +34955,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -36459,56 +35263,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "m"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
+      "t"
+     ],
+     [
+      "i"
+     ],
+     [
       "t"
      ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "t"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -36788,32 +35571,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -37093,32 +35867,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -37398,56 +36163,35 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
+      "i"
+     ],
+     [
+      "t"
+     ],
+     [
+      "a"
+     ],
+     [
+      "m"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "a"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
-      "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -37727,104 +36471,59 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 16,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 15,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -38116,104 +36815,59 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 16,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 15,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -38493,104 +37147,59 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 16,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 15,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -38882,107 +37491,62 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 16,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 15,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -39310,58 +37874,37 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -39689,58 +38232,37 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -40068,59 +38590,38 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 8,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -40472,111 +38973,66 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 16,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 7,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 8,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 12,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 13,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 14,
-     "fingers": [
+     ],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 15,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -40940,34 +39396,25 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -41343,32 +39790,23 @@
    "subdivision": "sixteenth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "m"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -41648,55 +40086,42 @@
    "subdivision": "sixteenth-note triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 12,
+    "byPosition": [
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 6,
-     "fingers": [
+     ],
+     [],
+     [],
+     [],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 9,
-     "fingers": [
+     ],
+     [],
+     [],
+     [
       "a",
       "t"
-     ]
-    },
-    {
-     "col": 10,
-     "fingers": [
+     ],
+     [
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 11,
-     "fingers": [
+     ],
+     [
       "a",
       "i"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -42002,28 +40427,22 @@
    "flags": [
     "measure-mismatch"
    ],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 3,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "i"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -42351,36 +40770,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -42660,36 +41070,27 @@
    "subdivision": "eighth note",
    "rhythm": "even",
    "flags": [],
-   "fingering": [
-    {
-     "col": 0,
-     "fingers": [
+   "fingering": {
+    "cycle": 4,
+    "byPosition": [
+     [
       "a",
       "m",
       "t"
-     ]
-    },
-    {
-     "col": 1,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 2,
-     "fingers": [
+     ],
+     [
       "t"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
+     ],
+     [
       "m",
       "i",
       "t"
      ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -42923,38 +41324,27 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [
-    {
-     "col": 1,
-     "fingers": [
+   "fingering": {
+    "cycle": 6,
+    "byPosition": [
+     [],
+     [
+      "i"
+     ],
+     [
+      "i"
+     ],
+     [
+      "i"
+     ],
+     [
+      "i"
+     ],
+     [
       "i"
      ]
-    },
-    {
-     "col": 2,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 3,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 4,
-     "fingers": [
-      "i"
-     ]
-    },
-    {
-     "col": 5,
-     "fingers": [
-      "i"
-     ]
-    }
-   ],
+    ]
+   },
    "measures": [
     {
      "chord": "C",
@@ -43356,7 +41746,10 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [],
+   "fingering": {
+    "cycle": 0,
+    "byPosition": []
+   },
    "measures": [
     {
      "chord": "C",
@@ -43756,7 +42149,10 @@
    "subdivision": "thirty-second triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [],
+   "fingering": {
+    "cycle": 0,
+    "byPosition": []
+   },
    "measures": [
     {
      "chord": "C",
@@ -44132,7 +42528,10 @@
    "subdivision": "thirty-second triplet",
    "rhythm": "even",
    "flags": [],
-   "fingering": [],
+   "fingering": {
+    "cycle": 0,
+    "byPosition": []
+   },
    "measures": [
     {
      "chord": "C",
@@ -44510,7 +42909,10 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [],
+   "fingering": {
+    "cycle": 0,
+    "byPosition": []
+   },
    "measures": [
     {
      "chord": "C",
@@ -44984,7 +43386,10 @@
    "flags": [
     "rhythm-approx"
    ],
-   "fingering": [],
+   "fingering": {
+    "cycle": 0,
+    "byPosition": []
+   },
    "measures": [
     {
      "chord": "C",

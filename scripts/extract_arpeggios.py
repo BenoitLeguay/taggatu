@@ -76,6 +76,48 @@ def merge_voice_splits(centers, note_groups):
     return out_c, out_n
 
 
+def extract_fingering(band, row_y, edges, tol, m1_cols):
+    """Right-hand fingering letters (t/i/m/a) are printed above the top staff
+    line, over the first pattern cycle of measure 1. Returns
+      {"cycle": N, "byPosition": [[finger, ... top->bottom], ...]}   (cycle 0 = none)
+
+    Letters at one x form a vertical stack that applies to the note column
+    beneath it; within the stack they map to that column's notes by vertical
+    order (the highest-pitched note gets the top letter). That rank mapping is
+    voicing-independent, so the same cycle is reused for the G7 bar.
+    """
+    if not m1_cols:
+        return {"cycle": 0, "byPosition": []}
+
+    words = [
+        w
+        for w in band
+        if w["text"] in FINGER_MAP
+        and w["y0"] < row_y[0] - 3
+        and edges[0] - 4 <= w["x0"] <= edges[1] + 4
+    ]
+    if not words:
+        return {"cycle": 0, "byPosition": []}
+
+    stacks = []
+    for w in sorted(words, key=lambda w: w["x0"]):
+        if stacks and w["x0"] - max(x["x0"] for x in stacks[-1]) <= tol + 1:
+            stacks[-1].append(w)
+        else:
+            stacks.append([w])
+
+    col_x = [cx for cx, _ in m1_cols]
+    pos_map = {}
+    for st in stacks:
+        letters = sorted(st, key=lambda w: w["y0"])  # top -> bottom
+        cx = sum(w["x0"] for w in letters) / len(letters)
+        ci = min(range(len(col_x)), key=lambda i: abs(col_x[i] - cx))
+        pos_map[ci] = [FINGER_MAP[w["text"]] for w in letters]
+
+    cycle = max(pos_map) + 1
+    return {"cycle": cycle, "byPosition": [pos_map.get(i, []) for i in range(cycle)]}
+
+
 def extract_exercise(page, slot, num):
     no_words = [w for w in page if w["text"] == "No."]
     no_words.sort(key=lambda w: w["y0"])
@@ -157,6 +199,7 @@ def extract_exercise(page, slot, num):
     # snap measures 1 & 2 to an even subdivision grid, folding voice-split
     # columns that land on the same slot into a single attack
     out_measures = []
+    merged_cols = [[], [], []]  # per measure: [(center_x, [unique notes]), ...]
     for mi in range(3):
         cols = raw_by_measure[mi]
         chord = CHORD_BY_MEASURE[mi]
@@ -171,15 +214,18 @@ def extract_exercise(page, slot, num):
             n = len(cxs)
             step = BEATS_PER_MEASURE / n
             notes_out = []
-            for i, notes in enumerate(note_groups):
+            for i, (cx, notes) in enumerate(zip(cxs, note_groups)):
                 start = round(i * step, 4)
                 dur = round(step, 4)
                 seen = set()
+                uniq = []
                 for note in sorted(notes, key=lambda x: x["string"]):
                     if note["string"] in seen:
                         continue
                     seen.add(note["string"])
+                    uniq.append(note)
                     notes_out.append({**note, "start": start, "dur": dur})
+                merged_cols[mi].append((cx, uniq))
             out_measures.append(
                 {"chord": chord, "columns": n, "notes": notes_out}
             )
@@ -203,23 +249,7 @@ def extract_exercise(page, slot, num):
             "notes": sorted(raw_by_measure[2][-1][1], key=lambda x: x["string"]),
         }
 
-    # right-hand fingering over measure 1
-    finger_words = [
-        w
-        for w in band
-        if w["text"] in FINGER_MAP
-        and w["y0"] < row_y[0] - 3
-        and edges[0] <= w["x0"] <= edges[1]
-    ]
-    fingering = []
-    for cx in cluster_x([w["x0"] for w in finger_words], tol):
-        stack = sorted(
-            (w for w in finger_words if abs(w["x0"] - cx) <= tol + 1),
-            key=lambda w: w["y0"],
-        )
-        fingering.append(
-            {"col": nearest(cx, centers), "fingers": [FINGER_MAP[w["text"]] for w in stack]}
-        )
+    fingering = extract_fingering(band, row_y, edges, tol, merged_cols[0])
 
     n1 = out_measures[0]["columns"] or 1
     n2 = out_measures[1]["columns"] or 1

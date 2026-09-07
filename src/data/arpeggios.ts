@@ -17,9 +17,15 @@ export interface ArpMeasure {
   notes: ArpNote[]
 }
 
-export interface FingeringHint {
-  col: number
-  fingers: string[]
+/**
+ * Right-hand fingering for one pattern cycle. `byPosition[i]` is the finger
+ * letters for the i-th column of the cycle, ordered top-to-bottom (highest
+ * string first). `cycle` is the number of columns before the pattern repeats;
+ * 0 means the score gives no fingering.
+ */
+export interface Fingering {
+  cycle: number
+  byPosition: string[][]
 }
 
 export interface Exercise {
@@ -30,7 +36,7 @@ export interface Exercise {
   subdivision: string
   rhythm: 'even'
   flags: string[]
-  fingering: FingeringHint[]
+  fingering: Fingering
   measures: ArpMeasure[]
   resolution: { chord: string; notes: { string: StringNumber; fret: number }[] } | null
 }
@@ -87,18 +93,27 @@ export function buildPlaybackPlan(
   const measures = opts.includeResolution ? ex.measures : ex.measures.slice(0, 2)
   const events: PlaybackEvent[] = []
 
+  const { cycle, byPosition } = ex.fingering
+
   measures.forEach((measure, measureIndex) => {
     const offset = measureIndex * beatsPerMeasure
-    // map fingering hints (measure-1 columns) onto column start times
     const colStarts = [...new Set(measure.notes.map((n) => n.start))].sort(
       (a, b) => a - b,
     )
     measure.notes.forEach((n) => {
-      const colIdx = colStarts.indexOf(n.start)
-      const hint =
-        measureIndex <= 1
-          ? ex.fingering.find((f) => f.col === colIdx)
-          : undefined
+      let finger: string | undefined
+      if (cycle > 0 && measureIndex <= 1) {
+        const colIdx = colStarts.indexOf(n.start)
+        const fingers = byPosition[((colIdx % cycle) + cycle) % cycle] ?? []
+        if (fingers.length) {
+          // rank this note within its column, highest string (pitch) first
+          const colNotes = measure.notes
+            .filter((x) => x.start === n.start)
+            .sort((a, b) => a.string - b.string)
+          const rank = colNotes.findIndex((x) => x.string === n.string)
+          finger = fingers[Math.min(Math.max(rank, 0), fingers.length - 1)]
+        }
+      }
       events.push({
         beat: offset + n.start,
         dur: n.dur,
@@ -106,7 +121,7 @@ export function buildPlaybackPlan(
         fret: n.fret,
         midi: fretToMidi(n.string, n.fret),
         measureIndex,
-        finger: hint?.fingers[0],
+        finger,
       })
     })
   })
