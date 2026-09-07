@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+/*
+  taggatu design tokens. Dark-first: the app commits to a single dark theme
+  tuned for low-light practice sessions. Colours are defined once here.
+*/
+@theme {
+  --color-bg: #0e1013;
+  --color-surface: #16191e;
+  --color-surface-2: #1e232b;
+  --color-border: #2b323d;
+  --color-text: #e7ecf3;
+  --color-muted: #8b95a4;
+  --color-accent: #ffb454;
+  --color-accent-soft: #b9762a;
+  --color-good: #4ade80;
+  --color-bad: #f87171;
+  --color-cool: #5eb3f7;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* fretboard component palette */
+  --fb-board: #23191180;
+  --fb-inlay: #3a3f48;
+  --fb-wire: #4c5461;
+  --fb-nut: #cfd6df;
+  --fb-string: #7f8896;
+  --fb-label: #8b95a4;
+  --fb-primary: #ffb454;
+  --fb-chord: #5eb3f7;
+  --fb-muted: #3a3f48;
+  --fb-correct: #4ade80;
+  --fb-wrong: #f87171;
+  --fb-ghost-stroke: #8b95a4;
+  --fb-marker-stroke: #0e1013;
+  --fb-marker-text: #14181d;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* range inputs: consistent look across the app */
+input[type='range'] {
+  accent-color: var(--color-accent);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+}
