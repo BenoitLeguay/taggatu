@@ -11,6 +11,47 @@ import { NoteHighway } from './NoteHighway'
 import { TransportBar } from './TransportBar'
 import { useArpeggioPlayer } from './useArpeggioPlayer'
 
+const exImg = (id: number) =>
+  `${import.meta.env.BASE_URL}exercises/ex-${String(id).padStart(3, '0')}.png`
+
+/** Shows the score/tab crop, keeping the previous image visible until the new
+ *  one has decoded so switching exercises doesn't flash white. */
+function ScoreImage({ id, name }: { id: number; name: string }) {
+  const [shown, setShown] = useState(id)
+  const pending = id !== shown ? id : null
+
+  useEffect(() => {
+    if (id === shown) return
+    let cancelled = false
+    const img = new Image()
+    img.src = exImg(id)
+    const swap = () => {
+      if (!cancelled) setShown(id)
+    }
+    img.decode?.().then(swap, swap)
+    return () => {
+      cancelled = true
+    }
+  }, [id, shown])
+
+  return (
+    <div className="relative border-t border-border overflow-x-auto bg-white">
+      <img
+        key={shown}
+        src={exImg(shown)}
+        alt={`Standard notation and tab for Giuliani ${name}`}
+        className="min-w-[720px] w-full"
+        decoding="async"
+      />
+      {pending != null && (
+        <div className="absolute top-2 right-3 text-[11px] text-neutral-400">
+          loading…
+        </div>
+      )}
+    </div>
+  )
+}
+
 const CHORD_SHAPES: Record<string, { string: StringNumber; fret: number | null }[]> = {
   C: [
     { string: 1, fret: 0 },
@@ -57,6 +98,16 @@ export default function ArpeggioTrainer() {
       return p
     })
   }, [selectedId, setParams])
+
+  // prefetch neighbouring score images so switching is instant
+  useEffect(() => {
+    for (const n of [selectedId - 1, selectedId + 1, selectedId + 2]) {
+      if (n >= 1 && n <= exercises.length) {
+        const img = new Image()
+        img.src = exImg(n)
+      }
+    }
+  }, [selectedId])
 
   // log a practiced loop for progress stats
   useEffect(() => {
@@ -107,14 +158,7 @@ export default function ArpeggioTrainer() {
           <summary className="cursor-pointer select-none px-4 py-2.5 text-sm text-muted hover:text-text">
             Score &amp; tab
           </summary>
-          <div className="border-t border-border overflow-x-auto bg-white">
-            <img
-              src={`${import.meta.env.BASE_URL}exercises/ex-${String(exercise.id).padStart(3, '0')}.png`}
-              alt={`Standard notation and tab for Giuliani ${exercise.name}`}
-              className="min-w-[720px] w-full"
-              loading="lazy"
-            />
-          </div>
+          <ScoreImage id={exercise.id} name={exercise.name} />
         </details>
 
         <section className="grid gap-4 sm:grid-cols-2">

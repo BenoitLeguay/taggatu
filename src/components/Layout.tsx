@@ -1,8 +1,19 @@
+import { useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { TRAINERS } from '../trainers'
 import { SettingsMenu } from './SettingsMenu'
 
 export function Layout() {
+  // Warm the audio engine (downloads + decodes the guitar samples) shortly
+  // after load, off the critical path, so the first Play is instant. The
+  // dynamic import keeps Tone.js out of the main bundle.
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      void import('../core/audio/engine').then((m) => m.preloadAudio())
+    }, 1200)
+    return () => window.clearTimeout(id)
+  }, [])
+
   return (
     <div className="min-h-full flex flex-col">
       <header className="border-b border-border bg-surface/80 backdrop-blur sticky top-0 z-20">

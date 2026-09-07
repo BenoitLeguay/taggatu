@@ -82,13 +82,34 @@ function graph() {
   return { master, guitar, click, accentClick }
 }
 
+/**
+ * Build the audio graph and kick off sample downloads WITHOUT resuming the
+ * AudioContext (no user gesture needed). Call this early so the guitar samples
+ * are decoded and ready before the first Play click.
+ */
+export function preloadAudio(): void {
+  graph()
+}
+
+export function samplesReady(): boolean {
+  return graph().guitar.loaded
+}
+
 export async function unlockAudio(): Promise<void> {
   graph()
   if (!started) {
     await Tone.start()
     started = true
   }
-  if (sampleLoad) await sampleLoad
+  // Wait for samples, but never block Play for more than a moment — if a few
+  // opening notes are silent because a sample is still decoding, that's better
+  // than a second of dead air. preloadAudio() on mount makes this rare.
+  if (sampleLoad && !graph().guitar.loaded) {
+    await Promise.race([
+      sampleLoad,
+      new Promise((r) => setTimeout(r, 500)),
+    ])
+  }
 }
 
 export function isAudioUnlocked(): boolean {
