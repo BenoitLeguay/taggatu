@@ -281,7 +281,7 @@ def main():
         "title": "120 Arpeggio Exercises",
         "composer": "Mauro Giuliani",
         "opus": "Op. 1a",
-        "note": "Public-domain studies. Tab edition by michaeljoyce@hotmail.com. "
+        "note": "Public-domain studies. Tab edition by Michael Joyce. "
         "Rhythms normalised to even subdivisions.",
         "tuning": "EADGBE",
         "exercises": exercises,
