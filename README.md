@@ -37,15 +37,18 @@ same right-hand pattern over G7 — followed by a held resolution chord; only th
 picking pattern changes across the 120.
 
 ```bash
-python3 scripts/pdf_dump.py --render       # PDF -> scripts/raw/{words.json,pageNN.png}
-python3 scripts/extract_arpeggios.py       # -> src/data/giuliani.json
+npm run data:extract      # PDF -> scripts/raw/words.json -> src/data/giuliani.json
+npm run data:images       # PDF -> public/exercises/ex-NNN.png (score + tab crops)
 ```
+
+Both need `pip install pymupdf` (and `pillow` for `data:images`). Pass
+`--render` to `scripts/pdf_dump.py` if you also want full page PNGs for
+eyeballing the extraction.
 
 Rhythms are normalised to even subdivisions (these études are written that way
 by design). ~15 dense two-voice studies where the note count doesn't land on a
 clean subdivision are tagged `rhythm-approx` and marked with `≈` in the UI —
 they still loop and train the pattern correctly, the spacing is just even.
-Requires `pip install pymupdf`.
 
 ## Layout
 

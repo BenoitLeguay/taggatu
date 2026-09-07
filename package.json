@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b --noEmit",
-    "build:data": "node scripts/build-arpeggios.mjs"
+    "data:extract": "python3 scripts/pdf_dump.py && python3 scripts/extract_arpeggios.py",
+    "data:images": "python3 scripts/crop_exercises.py"
   },
   "dependencies": {
     "react": "^19.2.8",
