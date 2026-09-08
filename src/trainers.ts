@@ -38,15 +38,6 @@ export const TRAINERS: TrainerMeta[] = [
     status: 'functional',
   },
   {
-    slug: 'rhythm',
-    path: '/rhythm',
-    title: 'Rhythm Trainer',
-    tagline: 'Tap the pattern in time. Get scored on your timing.',
-    icon: '🥁',
-    accent: '#4ade80',
-    status: 'functional',
-  },
-  {
     slug: 'pitch',
     path: '/pitch',
     title: 'Pitch & Tuner',

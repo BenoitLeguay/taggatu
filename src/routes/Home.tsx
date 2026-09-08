@@ -11,7 +11,7 @@ export function Home() {
           Practice, not noodling.
         </h1>
         <p className="text-muted mt-2 max-w-2xl">
-          Six focused trainers for classical and fingerstyle guitar. The
+          Five focused trainers for classical and fingerstyle guitar. The
           centrepiece is a scrolling-fretboard runner for all {ARPEGGIO_COUNT} of
           Giuliani&rsquo;s right-hand arpeggio studies, at any tempo you like.
         </p>

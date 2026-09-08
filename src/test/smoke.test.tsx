@@ -5,7 +5,6 @@ import { Home } from '../routes/Home'
 import ArpeggioTrainer from '../routes/arpeggio/ArpeggioTrainer'
 import FretboardTrainer from '../routes/FretboardTrainer'
 import EarTrainer from '../routes/EarTrainer'
-import RhythmTrainer from '../routes/RhythmTrainer'
 import PitchTrainer from '../routes/PitchTrainer'
 
 beforeAll(() => {
@@ -53,12 +52,6 @@ describe('route smoke tests', () => {
   it('EarTrainer renders choices', () => {
     render(wrap(<EarTrainer />))
     expect(screen.getByRole('button', { name: /replay/i })).toBeInTheDocument()
-  })
-
-  it('RhythmTrainer renders the slot grid', () => {
-    render(wrap(<RhythmTrainer />))
-    expect(screen.getByText(/Rhythm Trainer/)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /start/i })).toBeInTheDocument()
   })
 
   it('PitchTrainer asks for the mic first', () => {
