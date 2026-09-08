@@ -55,6 +55,15 @@ export const TRAINERS: TrainerMeta[] = [
     accent: '#2dd4bf',
     status: 'functional',
   },
+  {
+    slug: 'metronome',
+    path: '/metronome',
+    title: 'Metronome',
+    tagline: 'Tap tempo, pick a time signature, mute or accent any beat.',
+    icon: '⏱️',
+    accent: '#fbbf24',
+    status: 'functional',
+  },
 ]
 
 export function trainerBySlug(slug: string): TrainerMeta | undefined {

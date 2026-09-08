@@ -6,6 +6,7 @@ import ArpeggioTrainer from '../routes/arpeggio/ArpeggioTrainer'
 import FretboardTrainer from '../routes/FretboardTrainer'
 import EarTrainer from '../routes/EarTrainer'
 import PitchTrainer from '../routes/PitchTrainer'
+import MetronomeTrainer from '../routes/MetronomeTrainer'
 
 beforeAll(() => {
   // jsdom has no Web Audio; components only touch it on user interaction, but
@@ -29,11 +30,11 @@ const wrap = (ui: React.ReactNode) => (
 )
 
 describe('route smoke tests', () => {
-  it('Home lists the five trainers', () => {
+  it('Home lists the six trainers', () => {
     render(wrap(<Home />))
     expect(screen.getByText('Arpeggio Trainer')).toBeInTheDocument()
     expect(screen.getByText('Ear Training')).toBeInTheDocument()
-    expect(screen.getAllByRole('link').length).toBeGreaterThanOrEqual(5)
+    expect(screen.getAllByRole('link').length).toBeGreaterThanOrEqual(6)
   })
 
   it('ArpeggioTrainer renders the first study and the highway', () => {
@@ -59,5 +60,12 @@ describe('route smoke tests', () => {
     expect(
       screen.getByRole('button', { name: /enable microphone/i }),
     ).toBeInTheDocument()
+  })
+
+  it('MetronomeTrainer renders the transport and beat indicators for 4/4', () => {
+    render(wrap(<MetronomeTrainer />))
+    expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument()
+    expect(screen.getByText('100')).toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /^Beat \d/ })).toHaveLength(4)
   })
 })

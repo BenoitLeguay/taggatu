@@ -37,6 +37,7 @@ let master: Tone.Gain | null = null
 let guitar: Tone.Sampler | null = null
 let click: Tone.Synth | null = null
 let accentClick: Tone.Synth | null = null
+let subClick: Tone.Synth | null = null
 let started = false
 let sampleLoad: Promise<void> | null = null
 
@@ -75,7 +76,13 @@ function armSilentLoop(): void {
 
 function graph() {
   if (master) {
-    return { master, guitar: guitar!, click: click!, accentClick: accentClick! }
+    return {
+      master,
+      guitar: guitar!,
+      click: click!,
+      accentClick: accentClick!,
+      subClick: subClick!,
+    }
   }
 
   master = new Tone.Gain(0.9).toDestination()
@@ -119,7 +126,17 @@ function graph() {
   accentClick.volume.value = -6
   accentClick.connect(accentFilter)
 
-  return { master, guitar, click, accentClick }
+  // Beat subdivisions (eighths/sixteenths/triplets) reuse the same tick
+  // timbre, just quieter and shorter, so they read as "in between" the main
+  // click rather than a change of sound.
+  subClick = new Tone.Synth({
+    oscillator: { type: 'square' },
+    envelope: { attack: 0.001, decay: 0.02, sustain: 0, release: 0.01 },
+  })
+  subClick.volume.value = -26
+  subClick.connect(clickFilter)
+
+  return { master, guitar, click, accentClick, subClick }
 }
 
 /**
@@ -196,6 +213,12 @@ export function playClick(accent: boolean, time?: number): void {
   const t = time ?? Tone.now()
   if (accent) accentClick.triggerAttackRelease('A6', 0.05, t)
   else click.triggerAttackRelease('A5', 0.04, t)
+}
+
+/** A quiet tick for a beat subdivision (eighth/sixteenth/triplet), not a beat itself. */
+export function playSubClick(time?: number): void {
+  const { subClick } = graph()
+  subClick.triggerAttackRelease('A5', 0.025, time ?? Tone.now())
 }
 
 export function getTransport() {
