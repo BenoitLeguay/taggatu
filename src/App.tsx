@@ -8,6 +8,7 @@ const FretboardTrainer = lazy(() => import('./routes/FretboardTrainer'))
 const EarTrainer = lazy(() => import('./routes/EarTrainer'))
 const RhythmTrainer = lazy(() => import('./routes/RhythmTrainer'))
 const PitchTrainer = lazy(() => import('./routes/PitchTrainer'))
+const ChordScaleExplorer = lazy(() => import('./routes/ChordScaleExplorer'))
 
 function Loading() {
   return <div className="text-muted text-sm py-12 text-center">Loading…</div>
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <PitchTrainer />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'chord-scale',
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ChordScaleExplorer />
           </Suspense>
         ),
       },

@@ -15,6 +15,21 @@ export const CHORD_FORMULAS: Record<string, number[]> = {
   m7b5: [0, 3, 6, 10],
 }
 
+/** Short chord-symbol suffix, e.g. root "C" + CHORD_SYMBOLS.dom7 = "C7". */
+export const CHORD_SYMBOLS: Record<string, string> = {
+  maj: '',
+  min: 'm',
+  dim: 'dim',
+  aug: 'aug',
+  sus2: 'sus2',
+  sus4: 'sus4',
+  maj7: 'maj7',
+  min7: 'm7',
+  dom7: '7',
+  dim7: 'dim7',
+  m7b5: 'm7♭5',
+}
+
 export const CHORD_LABELS: Record<string, string> = {
   maj: 'major',
   min: 'minor',

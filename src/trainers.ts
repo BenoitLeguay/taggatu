@@ -55,6 +55,15 @@ export const TRAINERS: TrainerMeta[] = [
     accent: '#f87171',
     status: 'functional',
   },
+  {
+    slug: 'chord-scale',
+    path: '/chord-scale',
+    title: 'Chord & Scale Explorer',
+    tagline: 'Pick a scale or chord and see it lit up across the neck.',
+    icon: '🗺️',
+    accent: '#2dd4bf',
+    status: 'functional',
+  },
 ]
 
 export function trainerBySlug(slug: string): TrainerMeta | undefined {

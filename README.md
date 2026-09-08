@@ -26,7 +26,7 @@ docker build -t taggatu . && docker run --rm -p 4173:4173 taggatu
 
 Then open http://localhost:4173.
 
-## The five trainers
+## The six trainers
 
 | Trainer | What it does | State |
 | --- | --- | --- |
@@ -35,6 +35,7 @@ Then open http://localhost:4173.
 | **Ear Training** | Identify intervals and chord qualities by ear | functional |
 | **Rhythm Trainer** | Tap a one-bar pattern in time, scored on your timing error | functional |
 | **Pitch & Tuner** | Live mic pitch detection: chromatic tuner + "play the target note" | functional |
+| **Chord & Scale Explorer** | Pick a root + scale to see it lit up across the neck, or a root + chord quality to see playable voicings up the fretboard | functional |
 
 Settings and per-exercise progress are saved in the browser (localStorage).
 
