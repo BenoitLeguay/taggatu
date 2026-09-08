@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Home } from './routes/Home'
 
@@ -14,7 +14,10 @@ function Loading() {
   return <div className="text-muted text-sm py-12 text-center">Loading…</div>
 }
 
-const router = createBrowserRouter([
+// Hash routing (/#/arpeggios) needs no server-side rewrite rules, which
+// GitHub Pages doesn't support for a static project site — deep links and
+// hard refreshes just work.
+const router = createHashRouter([
   {
     path: '/',
     element: <Layout />,
