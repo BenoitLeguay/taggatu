@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { STRING_LABELS, STRING_NUMBERS } from '../../core/music/tuning'
 import { midiToName } from '../../core/music/notes'
+import { useSettings } from '../../store/settings'
 import type { PlaybackEvent } from '../../data/arpeggios'
 
 interface NoteHighwayProps {
@@ -22,7 +23,7 @@ const PAD_BOTTOM = 26
 const NOW_X = 190
 const BEATS_AHEAD = 3.1
 const BEATS_BEHIND = 1.0
-const NOTE_R = 17
+const NOTE_R = 19
 
 /**
  * The scrolling fretboard: six string lanes, notes flowing right-to-left past a
@@ -40,6 +41,7 @@ export function NoteHighway({
   showFingering,
   showNoteNames,
 }: NoteHighwayProps) {
+  const toggleSetting = useSettings((s) => s.toggle)
   const innerH = HEIGHT - PAD_TOP - PAD_BOTTOM
   const laneGap = innerH / (STRING_NUMBERS.length - 1)
   const laneY = (s: number) => PAD_TOP + (s - 1) * laneGap
@@ -66,6 +68,14 @@ export function NoteHighway({
 
   return (
     <div className="rounded-xl border border-border bg-[#0b0d10] overflow-hidden relative">
+      <button
+        type="button"
+        onClick={() => toggleSetting('showNoteNames')}
+        className="absolute right-2.5 top-2.5 z-10 rounded-md border border-border/70 bg-black/55 px-2.5 py-1 text-xs font-medium text-muted backdrop-blur-sm transition-colors hover:text-text hover:border-muted"
+        aria-pressed={showNoteNames}
+      >
+        {showNoteNames ? 'Note names' : 'Fret numbers'}
+      </button>
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full block"
@@ -159,20 +169,20 @@ export function NoteHighway({
                 const y = laneY(ev.string)
 
                 let fill = 'var(--color-cool)'
-                let textFill = '#06263d'
+                let textFill = '#031222'
                 let ring = 'none'
                 let opacity = 1
                 if (rel < -0.12) {
                   fill = '#3a4250'
-                  textFill = '#9aa4b2'
+                  textFill = '#e4e8ee'
                   opacity = Math.max(0.25, 1 + rel / BEATS_BEHIND)
                 } else if (rel <= 0.12) {
                   fill = 'var(--color-good)'
-                  textFill = '#05230f'
+                  textFill = '#02190a'
                   ring = '#ffffff'
                 } else if (rel < 0.9) {
                   fill = '#8fd0ff'
-                  textFill = '#06263d'
+                  textFill = '#031222'
                 }
 
                 return (
@@ -186,13 +196,13 @@ export function NoteHighway({
                       r={NOTE_R}
                       fill={fill}
                       stroke="#0b0d10"
-                      strokeWidth={2}
+                      strokeWidth={2.5}
                     />
                     <text
                       x={x}
-                      y={y + 5}
-                      fontSize={15}
-                      fontWeight={700}
+                      y={y + 6}
+                      fontSize={showNoteNames ? 16 : 18}
+                      fontWeight={800}
                       textAnchor="middle"
                       fill={textFill}
                       fontFamily="var(--font-mono)"

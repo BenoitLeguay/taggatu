@@ -35,8 +35,8 @@ const SAMPLE_MAP: Record<string, string> = {
 
 let master: Tone.Gain | null = null
 let guitar: Tone.Sampler | null = null
-let click: Tone.MembraneSynth | null = null
-let accentClick: Tone.MembraneSynth | null = null
+let click: Tone.Synth | null = null
+let accentClick: Tone.Synth | null = null
 let started = false
 let sampleLoad: Promise<void> | null = null
 
@@ -63,21 +63,28 @@ function graph() {
   const warmth = new Tone.Filter({ type: 'lowpass', frequency: 6500, Q: 0.4 })
   guitar.chain(warmth, body, master)
 
-  click = new Tone.MembraneSynth({
-    pitchDecay: 0.008,
-    octaves: 4,
-    envelope: { attack: 0.001, decay: 0.16, sustain: 0 },
+  // A metronome click should read as a short, high, dry "tick" — not a
+  // pitched note — so it stays clearly distinct from the plucked guitar and
+  // cuts through even at low volume. A brief square-wave blip through a
+  // highpass filter gives that woodblock-like tick; the accent is simply
+  // higher-pitched and louder, the way a real metronome's downbeat click is.
+  const clickFilter = new Tone.Filter({ type: 'highpass', frequency: 1200, Q: 0.5 })
+  clickFilter.connect(master)
+  click = new Tone.Synth({
+    oscillator: { type: 'square' },
+    envelope: { attack: 0.001, decay: 0.035, sustain: 0, release: 0.02 },
   })
-  click.volume.value = -9
-  click.connect(master)
+  click.volume.value = -14
+  click.connect(clickFilter)
 
-  accentClick = new Tone.MembraneSynth({
-    pitchDecay: 0.006,
-    octaves: 6,
-    envelope: { attack: 0.001, decay: 0.2, sustain: 0 },
+  const accentFilter = new Tone.Filter({ type: 'highpass', frequency: 1200, Q: 0.5 })
+  accentFilter.connect(master)
+  accentClick = new Tone.Synth({
+    oscillator: { type: 'square' },
+    envelope: { attack: 0.001, decay: 0.045, sustain: 0, release: 0.02 },
   })
-  accentClick.volume.value = -4
-  accentClick.connect(master)
+  accentClick.volume.value = -6
+  accentClick.connect(accentFilter)
 
   return { master, guitar, click, accentClick }
 }
@@ -153,8 +160,8 @@ export function strumMidis(
 export function playClick(accent: boolean, time?: number): void {
   const { click, accentClick } = graph()
   const t = time ?? Tone.now()
-  if (accent) accentClick.triggerAttackRelease('C3', '16n', t)
-  else click.triggerAttackRelease('C2', '32n', t)
+  if (accent) accentClick.triggerAttackRelease('A6', 0.05, t)
+  else click.triggerAttackRelease('A5', 0.04, t)
 }
 
 export function getTransport() {

@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useSettings } from '../../store/settings'
 import { Toggle } from '../../components/ui/Toggle'
+import { MetronomeVisual } from './MetronomeVisual'
 import type { ArpPlayerState } from './useArpeggioPlayer'
 
 interface TransportBarProps {
@@ -89,6 +90,15 @@ export function TransportBar({ player }: TransportBarProps) {
           checked={settings.metronomeEnabled}
           onChange={() => settings.toggle('metronomeEnabled')}
         />
+        {settings.metronomeEnabled && (
+          <MetronomeVisual
+            beatsPerMeasure={player.beatsPerMeasure}
+            loopBeat={player.loopBeat}
+            countInBeatsLeft={player.countInBeatsLeft}
+            playing={player.playing}
+            accentFirstBeat={settings.accentFirstBeat}
+          />
+        )}
         <Toggle
           compact
           label="Accent beat 1"
