@@ -26,14 +26,13 @@ docker build -t taggatu . && docker run --rm -p 4173:4173 taggatu
 
 Then open http://localhost:4173.
 
-## The six trainers
+## The five trainers
 
 | Trainer | What it does | State |
 | --- | --- | --- |
 | **Arpeggio Trainer** | All 120 of Giuliani's right-hand studies (Op. 1a) on a scrolling fretboard — pick one, set a tempo, loop it, or let the speed trainer ratchet it up | polished |
 | **Fretboard Trainer** | "Find the note" / "name the note" drills on the neck | functional |
 | **Ear Training** | Identify intervals and chord qualities by ear | functional |
-| **Rhythm Trainer** | Tap a one-bar pattern in time, scored on your timing error | functional |
 | **Pitch & Tuner** | Live mic pitch detection: chromatic tuner + "play the target note" | functional |
 | **Chord & Scale Explorer** | Pick a root + scale to see it lit up across the neck, or a root + chord quality to see playable voicings up the fretboard | functional |
 

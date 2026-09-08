@@ -6,7 +6,6 @@ import { Home } from './routes/Home'
 const ArpeggioTrainer = lazy(() => import('./routes/arpeggio/ArpeggioTrainer'))
 const FretboardTrainer = lazy(() => import('./routes/FretboardTrainer'))
 const EarTrainer = lazy(() => import('./routes/EarTrainer'))
-const RhythmTrainer = lazy(() => import('./routes/RhythmTrainer'))
 const PitchTrainer = lazy(() => import('./routes/PitchTrainer'))
 const ChordScaleExplorer = lazy(() => import('./routes/ChordScaleExplorer'))
 
@@ -44,14 +43,6 @@ const router = createHashRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <EarTrainer />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'rhythm',
-        element: (
-          <Suspense fallback={<Loading />}>
-            <RhythmTrainer />
           </Suspense>
         ),
       },
