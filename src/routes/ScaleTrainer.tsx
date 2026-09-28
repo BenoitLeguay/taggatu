@@ -1,10 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Fretboard } from '../core/fretboard/Fretboard'
 import type { FretMarker } from '../core/fretboard/types'
+import { Toggle } from '../components/ui/Toggle'
 import { pluckMidi, unlockAudio } from '../core/audio/engine'
 import { SCALES } from '../core/music/scales'
 import { generateScalePaths, type ScalePath } from '../core/music/scaleFingering'
-import { STANDARD_TUNING, STRING_NUMBERS, type StringNumber } from '../core/music/tuning'
+import {
+  FRETS_ON_NECK,
+  STANDARD_TUNING,
+  STRING_NUMBERS,
+  type StringNumber,
+} from '../core/music/tuning'
 
 const SOLFEGE = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si', 'Do']
 const START_FRET_MAX = 9
@@ -59,6 +65,7 @@ export default function ScaleTrainer() {
   const [start, setStartState] = useState(() => randomPlayableStart('major'))
   const [bpm, setBpm] = useState(90)
   const [playing, setPlaying] = useState(false)
+  const [vertical, setVertical] = useState(false)
   const [step, setStep] = useState(0)
 
   const paths = useMemo(
@@ -198,10 +205,6 @@ export default function ScaleTrainer() {
     })
   }, [activePath, step, scaleId])
 
-  const frets = activePath.map((n) => n.fret)
-  const fromFret = frets.length ? Math.max(0, Math.min(...frets) - 1) : 0
-  const toFret = frets.length ? Math.max(...frets) + 1 : 5
-
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <header className="flex flex-wrap items-center gap-4">
@@ -211,30 +214,34 @@ export default function ScaleTrainer() {
         </span>
       </header>
 
-      <div>
-        <div className="text-xs text-muted mb-1.5">Scale</div>
-        <div className="flex flex-wrap gap-1.5">
-          {SCALES.map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => selectScale(s.id)}
-              className={`px-3 py-1.5 rounded-lg border text-sm transition-colors ${
-                s.id === scaleId
-                  ? 'border-accent bg-accent/15 text-accent'
-                  : 'border-border bg-surface hover:bg-surface-2 hover:border-muted'
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <div className="text-xs text-muted mb-1.5">Scale</div>
+          <div className="flex flex-wrap gap-1.5">
+            {SCALES.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => selectScale(s.id)}
+                className={`px-3 py-1.5 rounded-lg border text-sm transition-colors ${
+                  s.id === scaleId
+                    ? 'border-accent bg-accent/15 text-accent'
+                    : 'border-border bg-surface hover:bg-surface-2 hover:border-muted'
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
         </div>
+        <Toggle label="Vertical" checked={vertical} onChange={() => setVertical((v) => !v)} />
       </div>
 
       <Fretboard
-        fromFret={fromFret}
-        toFret={toFret}
+        fromFret={0}
+        toFret={FRETS_ON_NECK}
         height={220}
+        vertical={vertical}
         markers={markers}
         onSelect={async (string, fret) => {
           await unlockAudio()
