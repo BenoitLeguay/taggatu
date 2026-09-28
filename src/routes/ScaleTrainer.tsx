@@ -1,83 +1,77 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Fretboard } from '../core/fretboard/Fretboard'
 import type { FretMarker } from '../core/fretboard/types'
+import { Segmented } from '../components/ui/Segmented'
 import { Toggle } from '../components/ui/Toggle'
 import { pluckMidi, unlockAudio } from '../core/audio/engine'
-import { midiToSolfege, pitchClass, SOLFEGE_NAMES } from '../core/music/notes'
+import {
+  CAGED_SHAPE_IDS,
+  degreeLabel,
+  shapeNotes,
+  shapeOrderForRoot,
+  shapeWindow,
+  type CagedShapeId,
+  type ShapeNote,
+} from '../core/music/cagedShapes'
+import { SOLFEGE_NAMES } from '../core/music/notes'
 import { SCALES } from '../core/music/scales'
-import { generateScalePaths, type ScalePath } from '../core/music/scaleFingering'
-import { STANDARD_TUNING, STRING_NUMBERS, type StringNumber } from '../core/music/tuning'
+import { STANDARD_TUNING, type StringNumber } from '../core/music/tuning'
 
-const DIATONIC_SOLFEGE = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si']
+type Mode = 'shape' | 'circulate'
+
 const DISPLAY_MAX_FRET = 19
 const MIN_BPM = 30
 const MAX_BPM = 220
 
-/** A random neck position that actually plays `tonicPc` (fixed-do: 0 = C,
- *  9 = A, etc.) and has a fingering — starting right at the top of the neck
- *  on the high e string can run out of room for a full octave. */
-function randomStartForTonic(
+/** Ascend through a shape's notes, then back down to (but not repeating)
+ *  the first — the standard way to drill a box. */
+function upDownSequence(notes: ShapeNote[]): ShapeNote[] {
+  if (notes.length <= 1) return notes
+  return [...notes, ...notes.slice(0, -1).reverse()]
+}
+
+function computeSegments(
+  mode: Mode,
+  shapeId: CagedShapeId,
   tonicPc: number,
   scaleId: string,
-): { string: StringNumber; fret: number } {
-  for (let i = 0; i < 20; i++) {
-    const string = (Math.floor(Math.random() * STRING_NUMBERS.length) + 1) as StringNumber
-    const openPc = pitchClass(STANDARD_TUNING[string])
-    const fret = ((tonicPc - openPc) % 12 + 12) % 12
-    if (generateScalePaths(string, fret, scaleId).length > 0) return { string, fret }
+): { segments: ShapeNote[][]; shapeSequence: CagedShapeId[] } {
+  if (mode === 'shape') {
+    const w = shapeWindow(shapeId, tonicPc)
+    return { segments: [upDownSequence(shapeNotes(w, tonicPc, scaleId))], shapeSequence: [shapeId] }
   }
-  const openPc6 = pitchClass(STANDARD_TUNING[6])
-  return { string: 6, fret: ((tonicPc - openPc6) % 12 + 12) % 12 } // always playable
-}
-
-function shuffledIndices(n: number): number[] {
-  const out = Array.from({ length: n }, (_, i) => i)
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[out[i], out[j]] = [out[j], out[i]]
+  const order = shapeOrderForRoot(tonicPc)
+  return {
+    segments: order.map((w) => upDownSequence(shapeNotes(w, tonicPc, scaleId))),
+    shapeSequence: order.map((w) => w.shape),
   }
-  return out
-}
-
-/** A fresh shuffle that never puts `exclude` first, so refilling the queue
- *  right after finishing that pattern can't immediately repeat it (unless
- *  it's the only pattern there is, in which case repeating is unavoidable). */
-function shuffledExcludingFirst(n: number, exclude: number): number[] {
-  if (n <= 1) return Array.from({ length: n }, (_, i) => i)
-  const order = shuffledIndices(n)
-  if (order[0] !== exclude) return order
-  const swapAt = 1 + Math.floor(Math.random() * (n - 1))
-  ;[order[0], order[swapAt]] = [order[swapAt], order[0]]
-  return order
 }
 
 export default function ScaleTrainer() {
-  const [scaleId, setScaleIdState] = useState('major')
-  const [tonicPc, setTonicPcState] = useState(() => Math.floor(Math.random() * 12))
-  const [start, setStartState] = useState(() => randomStartForTonic(tonicPc, 'major'))
+  const [tonicPc, setTonicPc] = useState(0) // C
+  const [scaleId, setScaleId] = useState('major')
+  const [mode, setMode] = useState<Mode>('shape')
+  const [shapeId, setShapeId] = useState<CagedShapeId>('C')
+  const [vertical, setVertical] = useState(false)
   const [bpm, setBpm] = useState(90)
   const [playing, setPlaying] = useState(false)
-  const [vertical, setVertical] = useState(false)
-  const [step, setStep] = useState(0)
+  const [segmentIndex, setSegmentIndex] = useState(0)
+  const [noteIndex, setNoteIndex] = useState(0)
 
-  const paths = useMemo(
-    () => generateScalePaths(start.string, start.fret, scaleId),
-    [start, scaleId],
+  const { segments, shapeSequence } = useMemo(
+    () => computeSegments(mode, shapeId, tonicPc, scaleId),
+    [mode, shapeId, tonicPc, scaleId],
   )
 
-  const [initialOrder] = useState(() => shuffledIndices(paths.length))
-  const [pathIndex, setPathIndexState] = useState(() => initialOrder[0] ?? 0)
-
-  const pathsRef = useRef<ScalePath[]>(paths)
-  const queueRef = useRef<number[]>(initialOrder.slice(1))
-  const pathIndexRef = useRef(initialOrder[0] ?? 0)
-  const stepRef = useRef(0)
+  const segmentsRef = useRef(segments)
+  const segmentIndexRef = useRef(0)
+  const noteIndexRef = useRef(0)
   const bpmRef = useRef(bpm)
   const intervalRef = useRef<number | null>(null)
 
   useEffect(() => {
-    pathsRef.current = paths
-  }, [paths])
+    segmentsRef.current = segments
+  }, [segments])
   useEffect(() => {
     bpmRef.current = bpm
   }, [bpm])
@@ -88,81 +82,68 @@ export default function ScaleTrainer() {
     setPlaying(false)
   }, [])
 
-  const resetTo = useCallback((freshPaths: ScalePath[]) => {
-    pathsRef.current = freshPaths
-    const order = shuffledIndices(freshPaths.length)
-    pathIndexRef.current = order[0] ?? 0
-    queueRef.current = order.slice(1)
-    stepRef.current = 0
-    setPathIndexState(pathIndexRef.current)
-    setStep(0)
+  const resetTo = useCallback((freshSegments: ShapeNote[][]) => {
+    segmentsRef.current = freshSegments
+    segmentIndexRef.current = 0
+    noteIndexRef.current = 0
+    setSegmentIndex(0)
+    setNoteIndex(0)
   }, [])
-
-  const rerollPosition = useCallback(() => {
-    stop()
-    const s = randomStartForTonic(tonicPc, scaleId)
-    setStartState(s)
-    resetTo(generateScalePaths(s.string, s.fret, scaleId))
-  }, [tonicPc, scaleId, stop, resetTo])
 
   const selectTonic = useCallback(
     (pc: number) => {
       stop()
-      const s = randomStartForTonic(pc, scaleId)
-      setTonicPcState(pc)
-      setStartState(s)
-      resetTo(generateScalePaths(s.string, s.fret, scaleId))
+      setTonicPc(pc)
+      resetTo(computeSegments(mode, shapeId, pc, scaleId).segments)
     },
-    [scaleId, stop, resetTo],
+    [mode, shapeId, scaleId, stop, resetTo],
   )
 
   const selectScale = useCallback(
     (id: string) => {
       stop()
-      const s = randomStartForTonic(tonicPc, id)
-      setScaleIdState(id)
-      setStartState(s)
-      resetTo(generateScalePaths(s.string, s.fret, id))
+      setScaleId(id)
+      resetTo(computeSegments(mode, shapeId, tonicPc, id).segments)
     },
-    [tonicPc, stop, resetTo],
+    [mode, shapeId, tonicPc, stop, resetTo],
   )
 
-  const goToPattern = useCallback(
-    (i: number) => {
+  const selectMode = useCallback(
+    (m: Mode) => {
       stop()
-      pathIndexRef.current = i
-      stepRef.current = 0
-      setPathIndexState(i)
-      setStep(0)
+      setMode(m)
+      resetTo(computeSegments(m, shapeId, tonicPc, scaleId).segments)
     },
-    [stop],
+    [shapeId, tonicPc, scaleId, stop, resetTo],
   )
 
-  const playStep = useCallback((idx: number) => {
-    const note = pathsRef.current[pathIndexRef.current]?.[idx]
+  const selectShape = useCallback(
+    (id: CagedShapeId) => {
+      stop()
+      setShapeId(id)
+      resetTo(computeSegments(mode, id, tonicPc, scaleId).segments)
+    },
+    [mode, tonicPc, scaleId, stop, resetTo],
+  )
+
+  const playStep = useCallback(() => {
+    const note = segmentsRef.current[segmentIndexRef.current]?.[noteIndexRef.current]
     if (note) pluckMidi(note.midi)
   }, [])
 
   const tick = useCallback(() => {
-    const path = pathsRef.current[pathIndexRef.current]
-    const nextStep = stepRef.current + 1
-    if (!path || nextStep >= path.length) {
-      // completed the octave — cycle to a different fingering, reshuffling
-      // once every pattern for this "Do" has been used
-      if (queueRef.current.length === 0) {
-        queueRef.current = shuffledExcludingFirst(
-          pathsRef.current.length,
-          pathIndexRef.current,
-        )
-      }
-      pathIndexRef.current = queueRef.current.shift() ?? 0
-      stepRef.current = 0
+    const segs = segmentsRef.current
+    const current = segs[segmentIndexRef.current]
+    const nextNote = noteIndexRef.current + 1
+    if (!current || nextNote >= current.length) {
+      segmentIndexRef.current = (segmentIndexRef.current + 1) % Math.max(1, segs.length)
+      noteIndexRef.current = 0
     } else {
-      stepRef.current = nextStep
+      noteIndexRef.current = nextNote
     }
-    setPathIndexState(pathIndexRef.current)
-    setStep(stepRef.current)
-    playStep(stepRef.current)
+    setSegmentIndex(segmentIndexRef.current)
+    setNoteIndex(noteIndexRef.current)
+    playStep()
   }, [playStep])
 
   const restartInterval = useCallback(() => {
@@ -172,16 +153,18 @@ export default function ScaleTrainer() {
 
   const play = useCallback(async () => {
     await unlockAudio()
-    stepRef.current = 0
-    setStep(0)
+    segmentIndexRef.current = 0
+    noteIndexRef.current = 0
+    setSegmentIndex(0)
+    setNoteIndex(0)
     setPlaying(true)
-    playStep(0)
+    playStep()
     restartInterval()
   }, [playStep, restartInterval])
 
   const togglePlay = () => (playing ? stop() : void play())
 
-  // live tempo changes: keep the current step, just re-time the clock
+  // live tempo changes: keep the current note, just re-time the clock
   useEffect(() => {
     if (playing) restartInterval()
   }, [bpm, playing, restartInterval])
@@ -190,33 +173,31 @@ export default function ScaleTrainer() {
     return () => stop()
   }, [stop])
 
-  const activePath = useMemo(
-    () => paths[Math.min(pathIndex, paths.length - 1)] ?? [],
-    [paths, pathIndex],
+  const activeSegment = useMemo(
+    () => segments[Math.min(segmentIndex, segments.length - 1)] ?? [],
+    [segments, segmentIndex],
   )
 
   const markers = useMemo<FretMarker[]>(() => {
-    return activePath.map((note, i) => {
+    return activeSegment.map((note, i) => {
       const variant: FretMarker['variant'] =
-        i < step ? 'ghost' : i === step ? 'primary' : 'chord'
+        i < noteIndex ? 'ghost' : i === noteIndex ? 'primary' : 'chord'
       return {
         string: note.string,
         fret: note.fret,
         variant,
-        // fixed-do: label the note actually being played (Do is always C,
-        // La is always A, ...), not "whichever degree this is in the scale"
-        label: midiToSolfege(note.midi),
+        label: degreeLabel(note.degreeSemitones),
       }
     })
-  }, [activePath, step])
+  }, [activeSegment, noteIndex])
+
+  const currentShape = shapeSequence[Math.min(segmentIndex, shapeSequence.length - 1)]
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <header className="flex flex-wrap items-center gap-4">
         <h1 className="text-2xl font-semibold">Scale Trainer</h1>
-        <span className="text-sm text-muted">
-          {DIATONIC_SOLFEGE.join('-')}… follow the note lit up on the neck.
-        </span>
+        <span className="text-sm text-muted">CAGED scale shapes — learn one, then link them up the neck.</span>
       </header>
 
       <div>
@@ -262,13 +243,55 @@ export default function ScaleTrainer() {
         <Toggle label="Vertical" checked={vertical} onChange={() => setVertical((v) => !v)} />
       </div>
 
+      <div className="flex flex-wrap items-end gap-4">
+        <div>
+          <div className="text-xs text-muted mb-1.5">Mode</div>
+          <Segmented
+            value={mode}
+            onChange={selectMode}
+            options={[
+              { value: 'shape', label: 'Shape' },
+              { value: 'circulate', label: 'Circulate' },
+            ]}
+          />
+        </div>
+
+        {mode === 'shape' ? (
+          <div>
+            <div className="text-xs text-muted mb-1.5">Shape</div>
+            <div className="flex gap-1.5">
+              {CAGED_SHAPE_IDS.map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => selectShape(id)}
+                  className={`h-9 w-9 rounded-lg border text-sm font-semibold transition-colors ${
+                    id === shapeId
+                      ? 'border-accent bg-accent/15 text-accent'
+                      : 'border-border bg-surface hover:bg-surface-2 hover:border-muted'
+                  }`}
+                >
+                  {id}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="text-sm text-muted">
+            Shape {segmentIndex + 1} of {shapeSequence.length}:{' '}
+            <span className="text-text font-semibold">{currentShape}</span> —{' '}
+            {shapeSequence.join(' → ')}
+          </div>
+        )}
+      </div>
+
       <Fretboard
         fromFret={0}
         toFret={DISPLAY_MAX_FRET}
         height={220}
         vertical={vertical}
         markers={markers}
-        onSelect={async (string, fret) => {
+        onSelect={async (string: StringNumber, fret: number) => {
           await unlockAudio()
           pluckMidi(STANDARD_TUNING[string] + fret)
         }}
@@ -302,45 +325,15 @@ export default function ScaleTrainer() {
             className="w-16 bg-surface-2 border border-border rounded-md px-2 py-1 text-sm text-center tabular-nums"
           />
         </div>
-
-        <button
-          type="button"
-          onClick={rerollPosition}
-          className="h-9 px-4 rounded-lg border border-border text-sm hover:bg-surface-2 hover:border-muted transition-colors"
-        >
-          🎲 New position
-        </button>
-
-        {paths.length > 1 && (
-          <div className="flex items-center gap-2 ml-auto">
-            <button
-              type="button"
-              onClick={() => goToPattern((pathIndex - 1 + paths.length) % paths.length)}
-              className="h-8 w-8 rounded-md border border-border text-sm hover:bg-surface-2 hover:border-muted transition-colors"
-            >
-              ‹
-            </button>
-            <span className="text-sm text-muted tabular-nums">
-              Pattern {pathIndex + 1} of {paths.length}
-            </span>
-            <button
-              type="button"
-              onClick={() => goToPattern((pathIndex + 1) % paths.length)}
-              className="h-8 w-8 rounded-md border border-border text-sm hover:bg-surface-2 hover:border-muted transition-colors"
-            >
-              ›
-            </button>
-          </div>
-        )}
       </div>
 
       <p className="text-xs text-muted">
-        Pick your tonic above — &ldquo;New position&rdquo; keeps that same note
-        but moves it somewhere else on the neck. Blue notes are coming up,
-        orange is the one to play now, faded ones are already played.{' '}
-        {paths.length > 1
-          ? `This position has ${paths.length} equally natural fingerings — browse them above, or just keep playing: a different one is picked automatically each time you loop back to the tonic.`
-          : 'This position has one natural nearest-position fingering.'}
+        Numbers are scale degrees from the tonic (1, 2b, 2, 3b, 3, 4...), not note
+        names. Blue notes are coming up, orange is the one to play now, faded
+        ones are already played.{' '}
+        {mode === 'shape'
+          ? 'Shape mode drills one CAGED box up and down — pick C, A, G, E or D above.'
+          : 'Circulate mode plays each shape in turn, low to high, in the order they naturally fall on the neck (always some rotation of C-A-G-E-D).'}
       </p>
     </div>
   )
