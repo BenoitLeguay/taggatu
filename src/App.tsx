@@ -9,6 +9,7 @@ const EarTrainer = lazy(() => import('./routes/EarTrainer'))
 const PitchTrainer = lazy(() => import('./routes/PitchTrainer'))
 const ChordScaleExplorer = lazy(() => import('./routes/ChordScaleExplorer'))
 const MetronomeTrainer = lazy(() => import('./routes/MetronomeTrainer'))
+const ScaleTrainer = lazy(() => import('./routes/ScaleTrainer'))
 
 function Loading() {
   return <div className="text-muted text-sm py-12 text-center">Loading…</div>
@@ -68,6 +69,14 @@ const router = createHashRouter([
         element: (
           <Suspense fallback={<Loading />}>
             <MetronomeTrainer />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'scale',
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ScaleTrainer />
           </Suspense>
         ),
       },

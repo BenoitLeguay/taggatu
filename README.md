@@ -26,7 +26,7 @@ docker build -t taggatu . && docker run --rm -p 4173:4173 taggatu
 
 Then open http://localhost:4173.
 
-## The six trainers
+## The seven trainers
 
 | Trainer | What it does | State |
 | --- | --- | --- |
@@ -36,6 +36,7 @@ Then open http://localhost:4173.
 | **Pitch & Tuner** | Live mic pitch detection: chromatic tuner + "play the target note" | functional |
 | **Chord & Scale Explorer** | Pick a root + scale to see it lit up across the neck, or a root + chord quality to see playable voicings up the fretboard | functional |
 | **Metronome** | Tap tempo or dial in a BPM (30-300), pick a time signature (2/4, 3/4, 4/4, 6/8), mute or accent any individual beat, optional auto-stop timer | functional |
+| **Scale Trainer** | Picks a random starting note ("Do") and steps you up one octave at your tempo, following the nearest playable fretting each time — cycling through every equally-natural fingering from that note | functional |
 
 Settings and per-exercise progress are saved in the browser (localStorage).
 

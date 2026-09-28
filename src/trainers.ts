@@ -8,7 +8,7 @@ export interface TrainerMeta {
   status: 'polished' | 'functional'
 }
 
-/** Single source of truth for the five practice modules. */
+/** Single source of truth for the practice modules. */
 export const TRAINERS: TrainerMeta[] = [
   {
     slug: 'arpeggios',
@@ -62,6 +62,15 @@ export const TRAINERS: TrainerMeta[] = [
     tagline: 'Tap tempo, pick a time signature, mute or accent any beat.',
     icon: '⏱️',
     accent: '#fbbf24',
+    status: 'functional',
+  },
+  {
+    slug: 'scale',
+    path: '/scale',
+    title: 'Scale Trainer',
+    tagline: 'A random Do, then follow do-re-mi up the neck at your tempo.',
+    icon: '🪜',
+    accent: '#34d399',
     status: 'functional',
   },
 ]
