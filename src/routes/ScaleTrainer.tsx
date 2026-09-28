@@ -1,77 +1,77 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Fretboard } from '../core/fretboard/Fretboard'
 import type { FretMarker } from '../core/fretboard/types'
-import { Segmented } from '../components/ui/Segmented'
 import { Toggle } from '../components/ui/Toggle'
 import { pluckMidi, unlockAudio } from '../core/audio/engine'
-import {
-  CAGED_SHAPE_IDS,
-  degreeLabel,
-  shapeNotes,
-  shapeOrderForRoot,
-  shapeWindow,
-  type CagedShapeId,
-  type ShapeNote,
-} from '../core/music/cagedShapes'
-import { SOLFEGE_NAMES } from '../core/music/notes'
-import { SCALES } from '../core/music/scales'
-import { STANDARD_TUNING, type StringNumber } from '../core/music/tuning'
-
-type Mode = 'shape' | 'circulate'
+import { degreeLabel, pitchClass, SOLFEGE_NAMES } from '../core/music/notes'
+import { SCALES, scaleById } from '../core/music/scales'
+import { walkOctave, type Direction, type WalkStep } from '../core/music/scaleWalk'
+import { STANDARD_TUNING, STRING_NUMBERS, type StringNumber } from '../core/music/tuning'
 
 const DISPLAY_MAX_FRET = 19
+const START_FRET_MAX = 9
 const MIN_BPM = 30
 const MAX_BPM = 220
 
-/** Ascend through a shape's notes, then back down to (but not repeating)
- *  the first — the standard way to drill a box. */
-function upDownSequence(notes: ShapeNote[]): ShapeNote[] {
-  if (notes.length <= 1) return notes
-  return [...notes, ...notes.slice(0, -1).reverse()]
+type Position = { string: StringNumber; fret: number }
+
+function octaveLength(scaleId: string): number {
+  return scaleById(scaleId).intervals.length + 1
 }
 
-function computeSegments(
-  mode: Mode,
-  shapeId: CagedShapeId,
-  tonicPc: number,
-  scaleId: string,
-): { segments: ShapeNote[][]; shapeSequence: CagedShapeId[] } {
-  if (mode === 'shape') {
-    const w = shapeWindow(shapeId, tonicPc)
-    return { segments: [upDownSequence(shapeNotes(w, tonicPc, scaleId))], shapeSequence: [shapeId] }
+/** Picks whichever direction(s) can actually complete a full octave from
+ *  `pos` (running off the neck — like descending an octave below open A,
+ *  which needs a string lower than low E — rules a direction out) and
+ *  chooses randomly between the ones that can. */
+function chooseRound(pos: Position, scaleId: string): { direction: Direction; steps: WalkStep[] } {
+  const expected = octaveLength(scaleId)
+  const up = walkOctave(pos.string, pos.fret, 'up', scaleId)
+  const down = walkOctave(pos.string, pos.fret, 'down', scaleId)
+  const upOk = up.length === expected
+  const downOk = down.length === expected
+  if (upOk && downOk) return Math.random() < 0.5 ? { direction: 'up', steps: up } : { direction: 'down', steps: down }
+  if (upOk) return { direction: 'up', steps: up }
+  if (downOk) return { direction: 'down', steps: down }
+  return up.length >= down.length ? { direction: 'up', steps: up } : { direction: 'down', steps: down }
+}
+
+/** A random neck position that actually plays `tonicPc` and can complete at
+ *  least one direction's octave from there. */
+function randomStartForTonic(tonicPc: number, scaleId: string): Position {
+  const expected = octaveLength(scaleId)
+  for (let i = 0; i < 20; i++) {
+    const string = (Math.floor(Math.random() * STRING_NUMBERS.length) + 1) as StringNumber
+    const openPc = pitchClass(STANDARD_TUNING[string])
+    const fret = Math.min(START_FRET_MAX, ((tonicPc - openPc) % 12 + 12) % 12)
+    const up = walkOctave(string, fret, 'up', scaleId)
+    const down = walkOctave(string, fret, 'down', scaleId)
+    if (up.length === expected || down.length === expected) return { string, fret }
   }
-  const order = shapeOrderForRoot(tonicPc)
-  return {
-    segments: order.map((w) => upDownSequence(shapeNotes(w, tonicPc, scaleId))),
-    shapeSequence: order.map((w) => w.shape),
-  }
+  return { string: 6, fret: 0 } // always playable
 }
 
 export default function ScaleTrainer() {
   const [tonicPc, setTonicPc] = useState(0) // C
   const [scaleId, setScaleId] = useState('major')
-  const [mode, setMode] = useState<Mode>('shape')
-  const [shapeId, setShapeId] = useState<CagedShapeId>('C')
   const [vertical, setVertical] = useState(false)
   const [bpm, setBpm] = useState(90)
   const [playing, setPlaying] = useState(false)
-  const [segmentIndex, setSegmentIndex] = useState(0)
-  const [noteIndex, setNoteIndex] = useState(0)
 
-  const { segments, shapeSequence } = useMemo(
-    () => computeSegments(mode, shapeId, tonicPc, scaleId),
-    [mode, shapeId, tonicPc, scaleId],
-  )
+  const [initialPos] = useState(() => randomStartForTonic(0, 'major'))
+  const [initialRound] = useState(() => chooseRound(initialPos, 'major'))
+  const [direction, setDirection] = useState<Direction>(initialRound.direction)
+  const [steps, setSteps] = useState<WalkStep[]>(initialRound.steps)
+  const [stepIndex, setStepIndex] = useState(0)
 
-  const segmentsRef = useRef(segments)
-  const segmentIndexRef = useRef(0)
-  const noteIndexRef = useRef(0)
+  const stepsRef = useRef(steps)
+  const stepIndexRef = useRef(0)
+  const scaleIdRef = useRef(scaleId)
   const bpmRef = useRef(bpm)
   const intervalRef = useRef<number | null>(null)
 
   useEffect(() => {
-    segmentsRef.current = segments
-  }, [segments])
+    scaleIdRef.current = scaleId
+  }, [scaleId])
   useEffect(() => {
     bpmRef.current = bpm
   }, [bpm])
@@ -82,67 +82,60 @@ export default function ScaleTrainer() {
     setPlaying(false)
   }, [])
 
-  const resetTo = useCallback((freshSegments: ShapeNote[][]) => {
-    segmentsRef.current = freshSegments
-    segmentIndexRef.current = 0
-    noteIndexRef.current = 0
-    setSegmentIndex(0)
-    setNoteIndex(0)
+  const startFreshRound = useCallback((pc: number, sid: string) => {
+    const pos = randomStartForTonic(pc, sid)
+    const round = chooseRound(pos, sid)
+    stepsRef.current = round.steps
+    stepIndexRef.current = 0
+    setDirection(round.direction)
+    setSteps(round.steps)
+    setStepIndex(0)
   }, [])
 
   const selectTonic = useCallback(
     (pc: number) => {
       stop()
       setTonicPc(pc)
-      resetTo(computeSegments(mode, shapeId, pc, scaleId).segments)
+      startFreshRound(pc, scaleId)
     },
-    [mode, shapeId, scaleId, stop, resetTo],
+    [scaleId, stop, startFreshRound],
   )
 
   const selectScale = useCallback(
     (id: string) => {
       stop()
       setScaleId(id)
-      resetTo(computeSegments(mode, shapeId, tonicPc, id).segments)
+      startFreshRound(tonicPc, id)
     },
-    [mode, shapeId, tonicPc, stop, resetTo],
+    [tonicPc, stop, startFreshRound],
   )
 
-  const selectMode = useCallback(
-    (m: Mode) => {
-      stop()
-      setMode(m)
-      resetTo(computeSegments(m, shapeId, tonicPc, scaleId).segments)
-    },
-    [shapeId, tonicPc, scaleId, stop, resetTo],
-  )
-
-  const selectShape = useCallback(
-    (id: CagedShapeId) => {
-      stop()
-      setShapeId(id)
-      resetTo(computeSegments(mode, id, tonicPc, scaleId).segments)
-    },
-    [mode, tonicPc, scaleId, stop, resetTo],
-  )
+  const newStart = useCallback(() => {
+    stop()
+    startFreshRound(tonicPc, scaleId)
+  }, [tonicPc, scaleId, stop, startFreshRound])
 
   const playStep = useCallback(() => {
-    const note = segmentsRef.current[segmentIndexRef.current]?.[noteIndexRef.current]
+    const note = stepsRef.current[stepIndexRef.current]
     if (note) pluckMidi(note.midi)
   }, [])
 
   const tick = useCallback(() => {
-    const segs = segmentsRef.current
-    const current = segs[segmentIndexRef.current]
-    const nextNote = noteIndexRef.current + 1
-    if (!current || nextNote >= current.length) {
-      segmentIndexRef.current = (segmentIndexRef.current + 1) % Math.max(1, segs.length)
-      noteIndexRef.current = 0
+    const current = stepsRef.current
+    const next = stepIndexRef.current + 1
+    if (next >= current.length) {
+      // this run just reached its octave — start the next one from exactly
+      // where it ended, skipping index 0 since that note was just played
+      const endpoint = current[current.length - 1]
+      const round = chooseRound({ string: endpoint.string, fret: endpoint.fret }, scaleIdRef.current)
+      stepsRef.current = round.steps
+      stepIndexRef.current = round.steps.length > 1 ? 1 : 0
+      setSteps(round.steps)
+      setDirection(round.direction)
     } else {
-      noteIndexRef.current = nextNote
+      stepIndexRef.current = next
     }
-    setSegmentIndex(segmentIndexRef.current)
-    setNoteIndex(noteIndexRef.current)
+    setStepIndex(stepIndexRef.current)
     playStep()
   }, [playStep])
 
@@ -153,10 +146,8 @@ export default function ScaleTrainer() {
 
   const play = useCallback(async () => {
     await unlockAudio()
-    segmentIndexRef.current = 0
-    noteIndexRef.current = 0
-    setSegmentIndex(0)
-    setNoteIndex(0)
+    stepIndexRef.current = 0
+    setStepIndex(0)
     setPlaying(true)
     playStep()
     restartInterval()
@@ -173,31 +164,20 @@ export default function ScaleTrainer() {
     return () => stop()
   }, [stop])
 
-  const activeSegment = useMemo(
-    () => segments[Math.min(segmentIndex, segments.length - 1)] ?? [],
-    [segments, segmentIndex],
-  )
-
-  const markers = useMemo<FretMarker[]>(() => {
-    return activeSegment.map((note, i) => {
-      const variant: FretMarker['variant'] =
-        i < noteIndex ? 'ghost' : i === noteIndex ? 'primary' : 'chord'
-      return {
-        string: note.string,
-        fret: note.fret,
-        variant,
-        label: degreeLabel(note.degreeSemitones),
-      }
-    })
-  }, [activeSegment, noteIndex])
-
-  const currentShape = shapeSequence[Math.min(segmentIndex, shapeSequence.length - 1)]
+  const markers: FretMarker[] = steps.map((step, i) => {
+    const variant: FretMarker['variant'] =
+      i < stepIndex ? 'ghost' : i === stepIndex ? 'primary' : 'chord'
+    const semitones = ((pitchClass(step.midi) - tonicPc) % 12 + 12) % 12
+    return { string: step.string, fret: step.fret, variant, label: degreeLabel(semitones) }
+  })
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <header className="flex flex-wrap items-center gap-4">
         <h1 className="text-2xl font-semibold">Scale Trainer</h1>
-        <span className="text-sm text-muted">CAGED scale shapes — learn one, then link them up the neck.</span>
+        <span className="text-sm text-muted">
+          A random octave up or down, then straight into another from wherever you land.
+        </span>
       </header>
 
       <div>
@@ -243,46 +223,13 @@ export default function ScaleTrainer() {
         <Toggle label="Vertical" checked={vertical} onChange={() => setVertical((v) => !v)} />
       </div>
 
-      <div className="flex flex-wrap items-end gap-4">
-        <div>
-          <div className="text-xs text-muted mb-1.5">Mode</div>
-          <Segmented
-            value={mode}
-            onChange={selectMode}
-            options={[
-              { value: 'shape', label: 'Shape' },
-              { value: 'circulate', label: 'Circulate' },
-            ]}
-          />
-        </div>
-
-        {mode === 'shape' ? (
-          <div>
-            <div className="text-xs text-muted mb-1.5">Shape</div>
-            <div className="flex gap-1.5">
-              {CAGED_SHAPE_IDS.map((id) => (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => selectShape(id)}
-                  className={`h-9 w-9 rounded-lg border text-sm font-semibold transition-colors ${
-                    id === shapeId
-                      ? 'border-accent bg-accent/15 text-accent'
-                      : 'border-border bg-surface hover:bg-surface-2 hover:border-muted'
-                  }`}
-                >
-                  {id}
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="text-sm text-muted">
-            Shape {segmentIndex + 1} of {shapeSequence.length}:{' '}
-            <span className="text-text font-semibold">{currentShape}</span> —{' '}
-            {shapeSequence.join(' → ')}
-          </div>
-        )}
+      <div className="flex items-center justify-center gap-3 rounded-xl border border-border bg-surface py-3">
+        <span className={`text-2xl ${direction === 'up' ? 'text-good' : 'text-accent'}`}>
+          {direction === 'up' ? '↑' : '↓'}
+        </span>
+        <span className="text-lg font-semibold">
+          {direction === 'up' ? 'Montée' : 'Descente'}
+        </span>
       </div>
 
       <Fretboard
@@ -325,15 +272,23 @@ export default function ScaleTrainer() {
             className="w-16 bg-surface-2 border border-border rounded-md px-2 py-1 text-sm text-center tabular-nums"
           />
         </div>
+
+        <button
+          type="button"
+          onClick={newStart}
+          className="h-9 px-4 rounded-lg border border-border text-sm hover:bg-surface-2 hover:border-muted transition-colors"
+        >
+          🎲 New start
+        </button>
       </div>
 
       <p className="text-xs text-muted">
-        Numbers are scale degrees from the tonic (1, 2b, 2, 3b, 3, 4...), not note
-        names. Blue notes are coming up, orange is the one to play now, faded
-        ones are already played.{' '}
-        {mode === 'shape'
-          ? 'Shape mode drills one CAGED box up and down — pick C, A, G, E or D above.'
-          : 'Circulate mode plays each shape in turn, low to high, in the order they naturally fall on the neck (always some rotation of C-A-G-E-D).'}
+        Numbers are scale degrees from the tonic (1, 2b, 2, 3b, 3, 4...), not
+        note names. Each octave — montée (up) or descente (down) — is picked
+        at random, then the next one starts right where this one ends, so the
+        run keeps moving across the neck instead of resetting. Blue notes are
+        coming up, orange is the one to play now, faded ones are already
+        played.
       </p>
     </div>
   )

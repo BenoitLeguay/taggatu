@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { midiToSolfege, nameToMidi } from './notes'
+import { degreeLabel, midiToSolfege, nameToMidi } from './notes'
 
 describe('midiToSolfege', () => {
   it('is fixed-do: the syllable always names the same pitch class, not "the tonic"', () => {
@@ -29,5 +29,20 @@ describe('midiToSolfege', () => {
     for (const [name, solfege] of Object.entries(expected)) {
       expect(midiToSolfege(nameToMidi(name))).toBe(solfege)
     }
+  })
+})
+
+describe('degreeLabel', () => {
+  it('names every semitone distance from the root', () => {
+    expect(degreeLabel(0)).toBe('1')
+    expect(degreeLabel(1)).toBe('2b')
+    expect(degreeLabel(2)).toBe('2')
+    expect(degreeLabel(3)).toBe('3b')
+    expect(degreeLabel(4)).toBe('3')
+    expect(degreeLabel(5)).toBe('4')
+    expect(degreeLabel(7)).toBe('5')
+    expect(degreeLabel(9)).toBe('6')
+    expect(degreeLabel(11)).toBe('7')
+    expect(degreeLabel(12)).toBe('1') // octave collapses back to the root
   })
 })

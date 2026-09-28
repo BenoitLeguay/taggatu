@@ -56,6 +56,15 @@ export function midiToSolfege(midi: number): string {
   return SOLFEGE_NAMES[pitchClass(midi)]
 }
 
+/** "1", "2b", "2", "3b", "3", "4", "4#", "5", "6b", "6", "7b", "7" — a
+ *  generic scale-degree name for any semitone distance from a tonic,
+ *  independent of which scale produced it. */
+const DEGREE_LABELS = ['1', '2b', '2', '3b', '3', '4', '4#', '5', '6b', '6', '7b', '7']
+
+export function degreeLabel(semitonesFromRoot: number): string {
+  return DEGREE_LABELS[((semitonesFromRoot % 12) + 12) % 12]
+}
+
 /** Pitch class 0-11 for a MIDI note (0 = C). */
 export function pitchClass(midi: number): number {
   return ((midi % 12) + 12) % 12
