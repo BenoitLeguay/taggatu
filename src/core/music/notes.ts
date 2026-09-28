@@ -32,6 +32,30 @@ export const NOTE_NAMES_FLAT = [
 
 export type PitchClassName = (typeof NOTE_NAMES_SHARP)[number]
 
+/**
+ * Fixed-do solfège: each syllable names one pitch class, the same way "C" or
+ * "Do" always means the same note regardless of what key you're in — unlike
+ * movable-do, where "Do" tracks whichever note is currently the tonic.
+ */
+export const SOLFEGE_NAMES = [
+  'Do',
+  'Do#',
+  'Re',
+  'Re#',
+  'Mi',
+  'Fa',
+  'Fa#',
+  'Sol',
+  'Sol#',
+  'La',
+  'La#',
+  'Si',
+] as const
+
+export function midiToSolfege(midi: number): string {
+  return SOLFEGE_NAMES[pitchClass(midi)]
+}
+
 /** Pitch class 0-11 for a MIDI note (0 = C). */
 export function pitchClass(midi: number): number {
   return ((midi % 12) + 12) % 12

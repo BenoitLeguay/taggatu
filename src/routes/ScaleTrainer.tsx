@@ -3,31 +3,31 @@ import { Fretboard } from '../core/fretboard/Fretboard'
 import type { FretMarker } from '../core/fretboard/types'
 import { Toggle } from '../components/ui/Toggle'
 import { pluckMidi, unlockAudio } from '../core/audio/engine'
+import { midiToSolfege, pitchClass, SOLFEGE_NAMES } from '../core/music/notes'
 import { SCALES } from '../core/music/scales'
 import { generateScalePaths, type ScalePath } from '../core/music/scaleFingering'
 import { STANDARD_TUNING, STRING_NUMBERS, type StringNumber } from '../core/music/tuning'
 
-const SOLFEGE = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si', 'Do']
-const START_FRET_MAX = 9
+const DIATONIC_SOLFEGE = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si']
 const DISPLAY_MAX_FRET = 19
 const MIN_BPM = 30
 const MAX_BPM = 220
 
-function randomStart(): { string: StringNumber; fret: number } {
-  const string = (Math.floor(Math.random() * STRING_NUMBERS.length) + 1) as StringNumber
-  const fret = Math.floor(Math.random() * (START_FRET_MAX + 1))
-  return { string, fret }
-}
-
-/** A start position is only useful once we know it actually has a fingering
- *  (starting right at the top of the neck on the high e string can run out
- *  of room for a full octave). */
-function randomPlayableStart(scaleId: string): { string: StringNumber; fret: number } {
+/** A random neck position that actually plays `tonicPc` (fixed-do: 0 = C,
+ *  9 = A, etc.) and has a fingering — starting right at the top of the neck
+ *  on the high e string can run out of room for a full octave. */
+function randomStartForTonic(
+  tonicPc: number,
+  scaleId: string,
+): { string: StringNumber; fret: number } {
   for (let i = 0; i < 20; i++) {
-    const s = randomStart()
-    if (generateScalePaths(s.string, s.fret, scaleId).length > 0) return s
+    const string = (Math.floor(Math.random() * STRING_NUMBERS.length) + 1) as StringNumber
+    const openPc = pitchClass(STANDARD_TUNING[string])
+    const fret = ((tonicPc - openPc) % 12 + 12) % 12
+    if (generateScalePaths(string, fret, scaleId).length > 0) return { string, fret }
   }
-  return { string: 6, fret: 0 } // always playable
+  const openPc6 = pitchClass(STANDARD_TUNING[6])
+  return { string: 6, fret: ((tonicPc - openPc6) % 12 + 12) % 12 } // always playable
 }
 
 function shuffledIndices(n: number): number[] {
@@ -51,14 +51,10 @@ function shuffledExcludingFirst(n: number, exclude: number): number[] {
   return order
 }
 
-function degreeLabel(i: number, last: number, scaleId: string): string {
-  if (scaleId === 'major') return SOLFEGE[i] ?? String(i + 1)
-  return i === last ? '1' : String(i + 1)
-}
-
 export default function ScaleTrainer() {
   const [scaleId, setScaleIdState] = useState('major')
-  const [start, setStartState] = useState(() => randomPlayableStart('major'))
+  const [tonicPc, setTonicPcState] = useState(() => Math.floor(Math.random() * 12))
+  const [start, setStartState] = useState(() => randomStartForTonic(tonicPc, 'major'))
   const [bpm, setBpm] = useState(90)
   const [playing, setPlaying] = useState(false)
   const [vertical, setVertical] = useState(false)
@@ -102,22 +98,33 @@ export default function ScaleTrainer() {
     setStep(0)
   }, [])
 
-  const rerollDo = useCallback(() => {
+  const rerollPosition = useCallback(() => {
     stop()
-    const s = randomPlayableStart(scaleId)
+    const s = randomStartForTonic(tonicPc, scaleId)
     setStartState(s)
     resetTo(generateScalePaths(s.string, s.fret, scaleId))
-  }, [scaleId, stop, resetTo])
+  }, [tonicPc, scaleId, stop, resetTo])
+
+  const selectTonic = useCallback(
+    (pc: number) => {
+      stop()
+      const s = randomStartForTonic(pc, scaleId)
+      setTonicPcState(pc)
+      setStartState(s)
+      resetTo(generateScalePaths(s.string, s.fret, scaleId))
+    },
+    [scaleId, stop, resetTo],
+  )
 
   const selectScale = useCallback(
     (id: string) => {
       stop()
-      const s = randomPlayableStart(id)
+      const s = randomStartForTonic(tonicPc, id)
       setScaleIdState(id)
       setStartState(s)
       resetTo(generateScalePaths(s.string, s.fret, id))
     },
-    [stop, resetTo],
+    [tonicPc, stop, resetTo],
   )
 
   const goToPattern = useCallback(
@@ -196,19 +203,41 @@ export default function ScaleTrainer() {
         string: note.string,
         fret: note.fret,
         variant,
-        label: degreeLabel(i, activePath.length - 1, scaleId),
+        // fixed-do: label the note actually being played (Do is always C,
+        // La is always A, ...), not "whichever degree this is in the scale"
+        label: midiToSolfege(note.midi),
       }
     })
-  }, [activePath, step, scaleId])
+  }, [activePath, step])
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <header className="flex flex-wrap items-center gap-4">
         <h1 className="text-2xl font-semibold">Scale Trainer</h1>
         <span className="text-sm text-muted">
-          {SOLFEGE.slice(0, 7).join('-')}… follow the note lit up on the neck.
+          {DIATONIC_SOLFEGE.join('-')}… follow the note lit up on the neck.
         </span>
       </header>
+
+      <div>
+        <div className="text-xs text-muted mb-1.5">Tonic (fixed-do — Do is always C)</div>
+        <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5">
+          {SOLFEGE_NAMES.map((name, pc) => (
+            <button
+              key={name}
+              type="button"
+              onClick={() => selectTonic(pc)}
+              className={`py-1.5 rounded-lg border text-sm font-mono transition-colors ${
+                pc === tonicPc
+                  ? 'border-accent bg-accent/15 text-accent'
+                  : 'border-border bg-surface hover:bg-surface-2 hover:border-muted'
+              }`}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
@@ -276,10 +305,10 @@ export default function ScaleTrainer() {
 
         <button
           type="button"
-          onClick={rerollDo}
+          onClick={rerollPosition}
           className="h-9 px-4 rounded-lg border border-border text-sm hover:bg-surface-2 hover:border-muted transition-colors"
         >
-          🎲 New Do
+          🎲 New position
         </button>
 
         {paths.length > 1 && (
@@ -306,9 +335,12 @@ export default function ScaleTrainer() {
       </div>
 
       <p className="text-xs text-muted">
-        &ldquo;Do&rdquo; is picked at random anywhere on the neck. Blue notes are
-        coming up, orange is the one to play now, faded ones are already
-        played. {paths.length > 1 ? `This starting note has ${paths.length} equally natural fingerings — browse them above, or just keep playing: a different one is picked automatically each time you loop back to Do.` : 'This starting note has one natural nearest-position fingering.'}
+        Pick your tonic above — &ldquo;New position&rdquo; keeps that same note
+        but moves it somewhere else on the neck. Blue notes are coming up,
+        orange is the one to play now, faded ones are already played.{' '}
+        {paths.length > 1
+          ? `This position has ${paths.length} equally natural fingerings — browse them above, or just keep playing: a different one is picked automatically each time you loop back to the tonic.`
+          : 'This position has one natural nearest-position fingering.'}
       </p>
     </div>
   )
