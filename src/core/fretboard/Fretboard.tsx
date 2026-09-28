@@ -121,7 +121,25 @@ export function Fretboard({
       viewBox={`0 0 ${svgWidth} ${svgHeight}`}
       role="img"
       aria-label="Guitar fretboard diagram"
-      style={{ width: '100%', height: 'auto', touchAction: 'manipulation' }}
+      style={
+        vertical
+          // Portrait's viewBox is tall and narrow (frets run down the
+          // page), so letting it stretch to a normal content column's full
+          // width — the landscape default — would blow the height up
+          // proportionally. Give it an explicit width instead and let
+          // height follow; `height` (the across-strings extent) is already
+          // the caller's stated size for that axis, so reuse it as the
+          // width in pixels, with a responsive cap for narrow viewports.
+          ? {
+              width: height,
+              maxWidth: '100%',
+              height: 'auto',
+              display: 'block',
+              marginInline: 'auto',
+              touchAction: 'manipulation',
+            }
+          : { width: '100%', height: 'auto', touchAction: 'manipulation' }
+      }
     >
       {/* fingerboard */}
       <rect x={board.x} y={board.y} width={board.width} height={board.height} rx={4} fill="var(--fb-board)" />

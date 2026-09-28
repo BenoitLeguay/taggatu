@@ -5,15 +5,11 @@ import { Toggle } from '../components/ui/Toggle'
 import { pluckMidi, unlockAudio } from '../core/audio/engine'
 import { SCALES } from '../core/music/scales'
 import { generateScalePaths, type ScalePath } from '../core/music/scaleFingering'
-import {
-  FRETS_ON_NECK,
-  STANDARD_TUNING,
-  STRING_NUMBERS,
-  type StringNumber,
-} from '../core/music/tuning'
+import { STANDARD_TUNING, STRING_NUMBERS, type StringNumber } from '../core/music/tuning'
 
 const SOLFEGE = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si', 'Do']
 const START_FRET_MAX = 9
+const DISPLAY_MAX_FRET = 19
 const MIN_BPM = 30
 const MAX_BPM = 220
 
@@ -239,7 +235,7 @@ export default function ScaleTrainer() {
 
       <Fretboard
         fromFret={0}
-        toFret={FRETS_ON_NECK}
+        toFret={DISPLAY_MAX_FRET}
         height={220}
         vertical={vertical}
         markers={markers}

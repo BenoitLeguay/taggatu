@@ -63,4 +63,14 @@ describe('Fretboard', () => {
     expect(wireV.getAttribute('y1')).toBe(wireV.getAttribute('y2')) // horizontal wire
     expect(wireV.getAttribute('x1')).not.toBe(wireV.getAttribute('x2'))
   })
+
+  it('bounds its rendered width in vertical mode instead of stretching to 100%', () => {
+    // Regression: the viewBox is tall and narrow in portrait, so naively
+    // keeping the landscape default of width:100%/height:auto let the
+    // rendered height blow up to whatever height:auto derives from a wide
+    // container's full width.
+    const { container } = render(<Fretboard fromFret={0} toFret={19} height={220} vertical />)
+    const svg = container.querySelector('svg')!
+    expect(svg.style.width).not.toBe('100%')
+  })
 })
