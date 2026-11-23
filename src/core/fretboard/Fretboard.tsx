@@ -281,7 +281,13 @@ export function Fretboard({
                 y={p.y + 3.5}
                 fontSize={10}
                 textAnchor="middle"
-                fill={variant === 'ghost' ? 'var(--fb-ghost-stroke)' : 'var(--fb-marker-text)'}
+                fill={
+                  variant === 'ghost'
+                    ? 'var(--fb-ghost-stroke)'
+                    : variant === 'muted'
+                      ? 'var(--fb-label)' // dark fill needs light text, not near-black
+                      : 'var(--fb-marker-text)'
+                }
                 fontFamily="ui-monospace, monospace"
               >
                 {m.label}

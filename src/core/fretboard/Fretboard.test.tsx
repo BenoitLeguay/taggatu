@@ -64,6 +64,19 @@ describe('Fretboard', () => {
     expect(wireV.getAttribute('x1')).not.toBe(wireV.getAttribute('x2'))
   })
 
+  it('gives the muted variant light label text, not near-black on its dark fill', () => {
+    render(
+      <Fretboard
+        fromFret={0}
+        toFret={5}
+        height={180}
+        markers={[{ string: 1, fret: 0, variant: 'muted', label: '2b' }]}
+      />,
+    )
+    const label = screen.getByText('2b')
+    expect(label.getAttribute('fill')).toBe('var(--fb-label)')
+  })
+
   it('bounds its rendered width in vertical mode instead of stretching to 100%', () => {
     // Regression: the viewBox is tall and narrow in portrait, so naively
     // keeping the landscape default of width:100%/height:auto let the

@@ -181,25 +181,24 @@ export default function ScaleTrainer() {
   const degreeLabelFor = (midi: number) =>
     degreeLabel(((pitchClass(midi) - tonicPc) % 12 + 12) % 12)
 
-  const markers: FretMarker[] = round.steps.map((step, i) => {
+  const currentMarkers: FretMarker[] = round.steps.map((step, i) => {
     const variant: FretMarker['variant'] =
       i < stepIndex ? 'ghost' : i === stepIndex ? 'primary' : 'chord'
     return { string: step.string, fret: step.fret, variant, label: degreeLabelFor(step.midi) }
   })
 
   // the next run is decided the moment this one starts, so it can be shown
-  // ahead of time instead of appearing only once it's due to be played. Its
-  // first note is highlighted too, since that's the exact note this run
-  // ends on — the hand-off point between the two.
-  const nextMarkers: FretMarker[] = nextRound.steps.map((step, i) => ({
+  // ahead of time instead of appearing only once it's due to be played —
+  // grayed out, on the same board, so it reads as "coming after this" at a
+  // glance. Its first note is skipped: that's the exact note the current
+  // run ends on, already shown by currentMarkers.
+  const nextMarkers: FretMarker[] = nextRound.steps.slice(1).map((step) => ({
     string: step.string,
     fret: step.fret,
-    variant: i === 0 ? 'primary' : 'chord',
+    variant: 'muted' as const,
     label: degreeLabelFor(step.midi),
   }))
-  const nextFrets = nextRound.steps.map((s) => s.fret)
-  const nextFromFret = Math.max(0, Math.min(...nextFrets) - 1)
-  const nextToFret = Math.max(...nextFrets) + 1
+  const markers = [...nextMarkers, ...currentMarkers]
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -260,6 +259,9 @@ export default function ScaleTrainer() {
         <span className="text-lg font-semibold">
           {round.direction === 'up' ? 'Montée' : 'Descente'}
         </span>
+        <span className="text-sm text-muted">
+          · next: {nextRound.direction === 'up' ? '↑ montée' : '↓ descente'} (grayed out below)
+        </span>
       </div>
 
       <Fretboard
@@ -273,22 +275,6 @@ export default function ScaleTrainer() {
           pluckMidi(STANDARD_TUNING[string] + fret)
         }}
       />
-
-      <div className="rounded-xl border border-dashed border-border bg-surface-2/40 p-3 space-y-2">
-        <div className="flex items-center gap-2 text-sm text-muted">
-          <span>Next —</span>
-          <span className={nextRound.direction === 'up' ? 'text-good' : 'text-accent'}>
-            {nextRound.direction === 'up' ? '↑ Montée' : '↓ Descente'}
-          </span>
-        </div>
-        <Fretboard
-          fromFret={nextFromFret}
-          toFret={nextToFret}
-          height={140}
-          vertical={vertical}
-          markers={nextMarkers}
-        />
-      </div>
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-xl border border-border bg-surface p-4">
         <button
@@ -332,12 +318,12 @@ export default function ScaleTrainer() {
         Numbers are scale degrees from the tonic (1, 2b, 2, 3b, 3, 4...), not
         note names. Each octave — montée (up) or descente (down) — is picked
         at random, then the next one starts right where this one ends, so the
-        run keeps moving across the neck instead of resetting. The dashed
-        &ldquo;Next&rdquo; box below the fretboard is decided as soon as the
-        current run starts, so you can see where it's headed and keep your
-        timing instead of discovering it the moment it has to be played. Blue
-        notes are coming up, orange is the one to play now, faded ones are
-        already played.
+        run keeps moving across the neck instead of resetting. It's decided
+        as soon as the current run starts, so the gray notes on the fretboard
+        show you where it's headed — keep an eye on them to stay in rhythm
+        instead of discovering it the moment it has to be played. Blue notes
+        are coming up, orange is the one to play now, faded ones are already
+        played.
       </p>
     </div>
   )
