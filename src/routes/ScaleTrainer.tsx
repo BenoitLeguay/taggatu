@@ -26,13 +26,14 @@ function endpointOf(round: Round): Position {
 }
 
 /** Picks whichever direction(s) can actually complete a full octave from
- *  `pos` (running off the neck — like descending an octave below open A,
- *  which needs a string lower than low E — rules a direction out) and
- *  chooses randomly between the ones that can. */
+ *  `pos` without going past DISPLAY_MAX_FRET (running off the neck — like
+ *  descending an octave below open A, which needs a string lower than low
+ *  E, or climbing past what the fretboard diagram shows — rules a direction
+ *  out) and chooses randomly between the ones that can. */
 function chooseRound(pos: Position, scaleId: string): { direction: Direction; steps: WalkStep[] } {
   const expected = octaveLength(scaleId)
-  const up = walkOctave(pos.string, pos.fret, 'up', scaleId)
-  const down = walkOctave(pos.string, pos.fret, 'down', scaleId)
+  const up = walkOctave(pos.string, pos.fret, 'up', scaleId, DISPLAY_MAX_FRET)
+  const down = walkOctave(pos.string, pos.fret, 'down', scaleId, DISPLAY_MAX_FRET)
   const upOk = up.length === expected
   const downOk = down.length === expected
   if (upOk && downOk) return Math.random() < 0.5 ? { direction: 'up', steps: up } : { direction: 'down', steps: down }
@@ -49,8 +50,8 @@ function randomStartForTonic(tonicPc: number, scaleId: string): Position {
     const string = (Math.floor(Math.random() * STRING_NUMBERS.length) + 1) as StringNumber
     const openPc = pitchClass(STANDARD_TUNING[string])
     const fret = Math.min(START_FRET_MAX, ((tonicPc - openPc) % 12 + 12) % 12)
-    const up = walkOctave(string, fret, 'up', scaleId)
-    const down = walkOctave(string, fret, 'down', scaleId)
+    const up = walkOctave(string, fret, 'up', scaleId, DISPLAY_MAX_FRET)
+    const down = walkOctave(string, fret, 'down', scaleId, DISPLAY_MAX_FRET)
     if (up.length === expected || down.length === expected) return { string, fret }
   }
   return { string: 6, fret: 0 } // always playable

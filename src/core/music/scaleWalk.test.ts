@@ -66,4 +66,13 @@ describe('walkOctave', () => {
     const upFromOpenA = walkOctave(5, 0, 'up', 'major')
     expect(upFromOpenA).toHaveLength(8) // plenty of neck available going up
   })
+
+  it('respects a custom fret ceiling, stopping short rather than exceeding it', () => {
+    // Without a cap, ascending from fret 18 climbs past fret 19.
+    const uncapped = walkOctave(6, 18, 'up', 'major')
+    expect(Math.max(...uncapped.map((s) => s.fret))).toBeGreaterThan(19)
+
+    const capped = walkOctave(6, 18, 'up', 'major', 19)
+    for (const s of capped) expect(s.fret).toBeLessThanOrEqual(19)
+  })
 })

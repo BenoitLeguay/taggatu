@@ -13,11 +13,14 @@ export interface WalkStep {
 /** A comfortable one-finger-per-fret hand span. */
 const WINDOW_SPAN = 4
 
-function candidatesForMidi(midi: number): { string: StringNumber; fret: number }[] {
+function candidatesForMidi(
+  midi: number,
+  maxFret: number,
+): { string: StringNumber; fret: number }[] {
   const out: { string: StringNumber; fret: number }[] = []
   for (const s of STRING_NUMBERS) {
     const fret = midi - STANDARD_TUNING[s]
-    if (fret >= 0 && fret <= FRETS_ON_NECK) out.push({ string: s, fret })
+    if (fret >= 0 && fret <= maxFret) out.push({ string: s, fret })
   }
   return out
 }
@@ -52,6 +55,7 @@ export function walkOctave(
   startFret: number,
   direction: Direction,
   scaleId: string,
+  maxFret: number = FRETS_ON_NECK,
 ): WalkStep[] {
   const startMidi = STANDARD_TUNING[startString] + startFret
   const offsets = targetOffsets(scaleId, direction)
@@ -62,7 +66,7 @@ export function walkOctave(
 
   for (let i = 1; i < offsets.length; i++) {
     const midi = startMidi + offsets[i]
-    const candidates = candidatesForMidi(midi)
+    const candidates = candidatesForMidi(midi, maxFret)
     if (candidates.length === 0) break // ran off the neck; hand back what we have
 
     const windowLo = direction === 'up' ? center : Math.max(0, center - WINDOW_SPAN)
