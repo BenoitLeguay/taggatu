@@ -14,9 +14,15 @@ const MIN_BPM = 30
 const MAX_BPM = 220
 
 type Position = { string: StringNumber; fret: number }
+type Round = { direction: Direction; steps: WalkStep[] }
 
 function octaveLength(scaleId: string): number {
   return scaleById(scaleId).intervals.length + 1
+}
+
+function endpointOf(round: Round): Position {
+  const last = round.steps[round.steps.length - 1]
+  return { string: last.string, fret: last.fret }
 }
 
 /** Picks whichever direction(s) can actually complete a full octave from
@@ -59,11 +65,14 @@ export default function ScaleTrainer() {
 
   const [initialPos] = useState(() => randomStartForTonic(0, 'major'))
   const [initialRound] = useState(() => chooseRound(initialPos, 'major'))
-  const [direction, setDirection] = useState<Direction>(initialRound.direction)
-  const [steps, setSteps] = useState<WalkStep[]>(initialRound.steps)
+  const [initialNextRound] = useState(() => chooseRound(endpointOf(initialRound), 'major'))
+
+  const [round, setRound] = useState<Round>(initialRound)
+  const [nextRound, setNextRound] = useState<Round>(initialNextRound)
   const [stepIndex, setStepIndex] = useState(0)
 
-  const stepsRef = useRef(steps)
+  const roundRef = useRef(round)
+  const nextRoundRef = useRef(nextRound)
   const stepIndexRef = useRef(0)
   const scaleIdRef = useRef(scaleId)
   const bpmRef = useRef(bpm)
@@ -84,11 +93,13 @@ export default function ScaleTrainer() {
 
   const startFreshRound = useCallback((pc: number, sid: string) => {
     const pos = randomStartForTonic(pc, sid)
-    const round = chooseRound(pos, sid)
-    stepsRef.current = round.steps
+    const r0 = chooseRound(pos, sid)
+    const r1 = chooseRound(endpointOf(r0), sid)
+    roundRef.current = r0
+    nextRoundRef.current = r1
     stepIndexRef.current = 0
-    setDirection(round.direction)
-    setSteps(round.steps)
+    setRound(r0)
+    setNextRound(r1)
     setStepIndex(0)
   }, [])
 
@@ -116,22 +127,25 @@ export default function ScaleTrainer() {
   }, [tonicPc, scaleId, stop, startFreshRound])
 
   const playStep = useCallback(() => {
-    const note = stepsRef.current[stepIndexRef.current]
+    const note = roundRef.current.steps[stepIndexRef.current]
     if (note) pluckMidi(note.midi)
   }, [])
 
   const tick = useCallback(() => {
-    const current = stepsRef.current
+    const current = roundRef.current.steps
     const next = stepIndexRef.current + 1
     if (next >= current.length) {
-      // this run just reached its octave — start the next one from exactly
-      // where it ended, skipping index 0 since that note was just played
-      const endpoint = current[current.length - 1]
-      const round = chooseRound({ string: endpoint.string, fret: endpoint.fret }, scaleIdRef.current)
-      stepsRef.current = round.steps
-      stepIndexRef.current = round.steps.length > 1 ? 1 : 0
-      setSteps(round.steps)
-      setDirection(round.direction)
+      // this run just reached its octave — the next one was already decided
+      // (and shown as the "Next" preview) when this run started, so swap it
+      // in now and immediately look one further ahead. Skip index 0 since
+      // that note is the one we just played.
+      const newCurrent = nextRoundRef.current
+      const newNext = chooseRound(endpointOf(newCurrent), scaleIdRef.current)
+      roundRef.current = newCurrent
+      nextRoundRef.current = newNext
+      stepIndexRef.current = newCurrent.steps.length > 1 ? 1 : 0
+      setRound(newCurrent)
+      setNextRound(newNext)
     } else {
       stepIndexRef.current = next
     }
@@ -164,12 +178,28 @@ export default function ScaleTrainer() {
     return () => stop()
   }, [stop])
 
-  const markers: FretMarker[] = steps.map((step, i) => {
+  const degreeLabelFor = (midi: number) =>
+    degreeLabel(((pitchClass(midi) - tonicPc) % 12 + 12) % 12)
+
+  const markers: FretMarker[] = round.steps.map((step, i) => {
     const variant: FretMarker['variant'] =
       i < stepIndex ? 'ghost' : i === stepIndex ? 'primary' : 'chord'
-    const semitones = ((pitchClass(step.midi) - tonicPc) % 12 + 12) % 12
-    return { string: step.string, fret: step.fret, variant, label: degreeLabel(semitones) }
+    return { string: step.string, fret: step.fret, variant, label: degreeLabelFor(step.midi) }
   })
+
+  // the next run is decided the moment this one starts, so it can be shown
+  // ahead of time instead of appearing only once it's due to be played. Its
+  // first note is highlighted too, since that's the exact note this run
+  // ends on — the hand-off point between the two.
+  const nextMarkers: FretMarker[] = nextRound.steps.map((step, i) => ({
+    string: step.string,
+    fret: step.fret,
+    variant: i === 0 ? 'primary' : 'chord',
+    label: degreeLabelFor(step.midi),
+  }))
+  const nextFrets = nextRound.steps.map((s) => s.fret)
+  const nextFromFret = Math.max(0, Math.min(...nextFrets) - 1)
+  const nextToFret = Math.max(...nextFrets) + 1
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -224,11 +254,11 @@ export default function ScaleTrainer() {
       </div>
 
       <div className="flex items-center justify-center gap-3 rounded-xl border border-border bg-surface py-3">
-        <span className={`text-2xl ${direction === 'up' ? 'text-good' : 'text-accent'}`}>
-          {direction === 'up' ? '↑' : '↓'}
+        <span className={`text-2xl ${round.direction === 'up' ? 'text-good' : 'text-accent'}`}>
+          {round.direction === 'up' ? '↑' : '↓'}
         </span>
         <span className="text-lg font-semibold">
-          {direction === 'up' ? 'Montée' : 'Descente'}
+          {round.direction === 'up' ? 'Montée' : 'Descente'}
         </span>
       </div>
 
@@ -243,6 +273,22 @@ export default function ScaleTrainer() {
           pluckMidi(STANDARD_TUNING[string] + fret)
         }}
       />
+
+      <div className="rounded-xl border border-dashed border-border bg-surface-2/40 p-3 space-y-2">
+        <div className="flex items-center gap-2 text-sm text-muted">
+          <span>Next —</span>
+          <span className={nextRound.direction === 'up' ? 'text-good' : 'text-accent'}>
+            {nextRound.direction === 'up' ? '↑ Montée' : '↓ Descente'}
+          </span>
+        </div>
+        <Fretboard
+          fromFret={nextFromFret}
+          toFret={nextToFret}
+          height={140}
+          vertical={vertical}
+          markers={nextMarkers}
+        />
+      </div>
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-xl border border-border bg-surface p-4">
         <button
@@ -286,9 +332,12 @@ export default function ScaleTrainer() {
         Numbers are scale degrees from the tonic (1, 2b, 2, 3b, 3, 4...), not
         note names. Each octave — montée (up) or descente (down) — is picked
         at random, then the next one starts right where this one ends, so the
-        run keeps moving across the neck instead of resetting. Blue notes are
-        coming up, orange is the one to play now, faded ones are already
-        played.
+        run keeps moving across the neck instead of resetting. The dashed
+        &ldquo;Next&rdquo; box below the fretboard is decided as soon as the
+        current run starts, so you can see where it's headed and keep your
+        timing instead of discovering it the moment it has to be played. Blue
+        notes are coming up, orange is the one to play now, faded ones are
+        already played.
       </p>
     </div>
   )
